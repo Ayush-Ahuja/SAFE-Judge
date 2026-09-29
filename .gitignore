@@ -1,0 +1,47 @@
+# SAFE-Judge .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data (downloaded datasets are large)
+data/trec_dl_2019/
+data/trec_dl_2020/
+data/trec_covid/
+data/msmarco_train/
+data/runs/
+cache/
+
+# Results (keep figures, ignore large result dumps)
+results/pilot/*.json
+results/baselines/*.json
+results/safe_judge/*.json
+
+# Logs
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Keep these directories
+!data/splits/.gitkeep
+!results/figures/.gitkeep
