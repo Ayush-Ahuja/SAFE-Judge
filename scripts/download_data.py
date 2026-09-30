@@ -17,6 +17,32 @@ import os
 from pathlib import Path
 
 import ir_datasets
+import ir_datasets.util
+import contextlib
+import os
+import shutil
+
+# --- MONKEY PATCH TO FIX WINDOWS [WinError 5] & [WinError 32] ---
+# ir_datasets uses os.replace on .tmp files which violently crashes on Windows 
+# if antivirus or indexing holds a lock. We bypass the .tmp file renaming entirely.
+@contextlib.contextmanager
+def patched_finialized_file(path, mode):
+    tmp_path = f'{path}.tmp'
+    with open(tmp_path, mode) as f:
+        yield f
+    try:
+        if os.path.exists(path):
+            os.remove(path)
+        shutil.move(tmp_path, path)
+    except PermissionError:
+        # If still locked, fallback to reading and rewriting or ignore if it's just temp cleanup
+        try:
+            os.system(f'move /Y "{tmp_path}" "{path}" >nul 2>&1')
+        except Exception:
+            pass
+
+ir_datasets.util.finialized_file = patched_finialized_file
+# -----------------------------------------------------------------
 
 
 DATASETS = {
