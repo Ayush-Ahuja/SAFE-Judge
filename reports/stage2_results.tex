@@ -1,0 +1,71 @@
+% Generated from validated pilot artifacts; rerun scripts/build_stage2_report.py.
+\newcommand{\PilotAccuracy}{79.40}
+\newcommand{\PilotFone}{0.7368}
+\newcommand{\PilotBrier}{0.1485}
+\newcommand{\PilotECE}{0.0688}
+\newcommand{\PilotQueryAccuracy}{79.46}
+\newcommand{\PilotScoreMinutes}{33.12}
+\newcommand{\PilotProcessMinutes}{43.60}
+\newcommand{\PilotPrepMinutes}{13.70}
+\newcommand{\PilotThroughput}{4.66}
+\newcommand{\PilotPeakAllocated}{3.91}
+\newcommand{\PilotPeakReserved}{4.69}
+\newcommand{\PilotGPUVRAM}{14.56}
+\newcommand{\PilotTemperature}{1.6245}
+\newcommand{\PilotReviewed}{50}
+\newcommand{\PilotManifestHash}{e812a7e76cc4b3e87e62f34dd73c05ee108d7b09b15a1381f3ca13ee8610ec20}
+\newcommand{\PilotPredictionHash}{c321f8374496f5c48deaf51c21e8ba55f29ffa446a7ed2e0ad49a1bb9b86dc65}
+\newcommand{\PilotModelRevision}{851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a}
+\newcommand{\PilotPipelineHash}{f3c066f0e9318a72ab3351d1bf237eb351b32c78d02534cff3f4439f89761d0d}
+\newcommand{\PilotMassMean}{0.9988}
+\newcommand{\PilotMassMin}{0.9977}
+\newcommand{\PilotRepeatMean}{0.000680}
+\newcommand{\PilotRepeatMax}{0.004161}
+\newcommand{\PilotRepeatSeconds}{31.81}
+\newcommand{\PilotHFCache}{9.33}
+\newcommand{\PilotCorpusCache}{4.11}
+\newcommand{\PilotBaselineRows}{%
+Qwen3.5-4B & 79.40 & 0.7368 & 0.1485 & 0.0688 \\
+Always non-relevant & 72.99 & 0.4219 & 0.2701 & 0.2701 \\
+Always relevant & 27.01 & 0.2127 & 0.7299 & 0.7299 \\
+}
+\newcommand{\PilotIntervalRows}{%
+Accuracy & 0.7558 & 0.8294 \\
+Macro-F1 & 0.6778 & 0.7828 \\
+Brier score & 0.1224 & 0.1774 \\
+ECE (10 probability bins) & 0.0435 & 0.1104 \\
+Query-mean accuracy & 0.7544 & 0.8332 \\
+Accuracy gain over always non-relevant & 0.0059 & 0.1126 \\
+}
+\newcommand{\PilotGradeRows}{%
+0 & 5,158 & 55.70 & 424 & 8.22 \\
+1 & 1,601 & 17.29 & 501 & 31.29 \\
+2 & 1,804 & 19.48 & 691 & 38.30 \\
+3 & 697 & 7.53 & 292 & 41.89 \\
+}
+\newcommand{\PilotThresholdRows}{%
+0.50 & 9,260 & 100.00 & 20.60 & 20.60 \\
+0.70 & 7,756 & 83.76 & 15.90 & 13.32 \\
+0.80 & 6,690 & 72.25 & 13.06 & 9.44 \\
+0.90 & 4,632 & 50.02 & 9.78 & 4.89 \\
+0.95 & 2,389 & 25.80 & 7.33 & 1.89 \\
+0.99 & 23 & 0.25 & 0.00 & 0.00 \\
+}
+\newcommand{\PilotCalibrationRows}{%
+Raw & 79.76 & 0.7413 & 0.1437 & 0.0626 \\
+Temperature scaled & 79.76 & 0.7413 & 0.1417 & 0.0753 \\
+}
+\newcommand{\PilotManualAnalysis}{%
+I reviewed 50 unique errors across 31 queries: 27 false positives and 23 false negatives.
+\begin{table}[H]\centering\small
+\caption{Primary categories in the 50 personally reviewed disagreements. FP/FN use the official binary labels.}\label{tab:manual}
+\begin{tabular}{@{}lrrrr@{}}\toprule Category & Count & Share (\%) & FP & FN \\\midrule
+Judgment disagreement & 23 & 46 & 12 & 11 \\
+Incomplete answer & 10 & 20 & 10 & 0 \\
+Subtle relevance & 9 & 18 & 0 & 9 \\
+Keyword distraction & 4 & 8 & 4 & 0 \\
+Entity mismatch & 3 & 6 & 1 & 2 \\
+Domain vocabulary & 1 & 2 & 0 & 1 \\
+\bottomrule\end{tabular}\end{table}
+The sample contains 19 high-confidence disagreements (confidence at least 0.90). Category shares describe this diagnostic sample, not the prevalence of causes in all 1,908 errors.
+}

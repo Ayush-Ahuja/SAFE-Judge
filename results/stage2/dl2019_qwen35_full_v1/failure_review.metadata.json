@@ -1,0 +1,9 @@
+{
+  "seed": 42,
+  "count": 50,
+  "manual_reviews_completed": 0,
+  "manifest_sha256": "e812a7e76cc4b3e87e62f34dd73c05ee108d7b09b15a1381f3ca13ee8610ec20",
+  "predictions_sha256": "c321f8374496f5c48deaf51c21e8ba55f29ffa446a7ed2e0ad49a1bb9b86dc65",
+  "sampling": "Round-robin shuffled query/error-type/confidence strata; diagnostic, not prevalence representative.",
+  "annotation": "Human must fill failure_category, notes, reviewer and reviewed. Categories are not inferred."
+}

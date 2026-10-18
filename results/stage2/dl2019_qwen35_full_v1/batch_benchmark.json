@@ -1,0 +1,46 @@
+{
+  "selected_batch_size": 8,
+  "selection": "Highest throughput on up to 32 longest inputs by character length; labels unused",
+  "measurements": [
+    {
+      "batch_size": 1,
+      "status": "complete",
+      "pairs": 32,
+      "seconds": 11.268536832999871,
+      "pairs_per_second": 2.8397653106380334,
+      "peak_allocated_bytes": 3411168768
+    },
+    {
+      "batch_size": 2,
+      "status": "complete",
+      "pairs": 32,
+      "seconds": 9.684823831999893,
+      "pairs_per_second": 3.304138573410899,
+      "peak_allocated_bytes": 3508803584
+    },
+    {
+      "batch_size": 4,
+      "status": "complete",
+      "pairs": 32,
+      "seconds": 9.008563245000005,
+      "pairs_per_second": 3.5521757609639764,
+      "peak_allocated_bytes": 3703214080
+    },
+    {
+      "batch_size": 8,
+      "status": "complete",
+      "pairs": 32,
+      "seconds": 8.860572509000121,
+      "pairs_per_second": 3.6115047834094263,
+      "peak_allocated_bytes": 4091067904
+    },
+    {
+      "batch_size": 16,
+      "status": "complete",
+      "pairs": 32,
+      "seconds": 8.88433917400016,
+      "pairs_per_second": 3.6018435781523688,
+      "peak_allocated_bytes": 4868986880
+    }
+  ]
+}

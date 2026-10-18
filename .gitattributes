@@ -1,0 +1,24 @@
+# Stable source hashes on Windows and Linux
+*.py text eol=lf
+*.sh text eol=lf
+*.pbs text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
+*.tex text eol=lf
+*.ipynb text eol=lf
+*.txt text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+# Scientific artifacts retain exact recorded bytes for checksum verification
+results/stage2/** -text
+data/pilot/** -text
+reports/failure_review.csv -text
+reports/failure_review.metadata.json -text
+*.pdf binary
+*.png binary
+*.zip binary
+# Preserve the recorded scoring-pipeline hash, including original line endings
+scripts/run_pilot.py -text -eol
+src/assessor/model.py -text -eol
+src/assessor/prompts.py -text -eol
+src/utils/io.py -text -eol

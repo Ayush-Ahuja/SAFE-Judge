@@ -1,0 +1,9 @@
+{
+  "seconds": 821.7281037070001,
+  "pairs": 9260,
+  "queries": 43,
+  "child_cpu_seconds": 634.8123690000001,
+  "corpus_store": "sequential canonical collection scan; no retrieval/document lookup index",
+  "manifest_sha256": "e812a7e76cc4b3e87e62f34dd73c05ee108d7b09b15a1381f3ca13ee8610ec20",
+  "configuration_sha256": "330073d493ebe08600984b1df1839338f5674e5453b13dc8c2bc133a288a6fb8"
+}

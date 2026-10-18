@@ -1,0 +1,27 @@
+{
+  "pairs": 9260,
+  "queries": 43,
+  "accuracy": 0.7939524838012959,
+  "macro_f1": 0.7367677683633597,
+  "tp": 1518,
+  "tn": 5834,
+  "fp": 925,
+  "fn": 983,
+  "brier_score": 0.14850261532184003,
+  "ece_probability_bins_10": 0.06878311112226383,
+  "status": "complete_pilot",
+  "relevance_threshold": 2,
+  "missing_manifest_pairs": 0,
+  "duplicate_extra_rows_removed": 0,
+  "deduplication_requested": false,
+  "manifest_sha256": "e812a7e76cc4b3e87e62f34dd73c05ee108d7b09b15a1381f3ca13ee8610ec20",
+  "predictions_sha256": "c321f8374496f5c48deaf51c21e8ba55f29ffa446a7ed2e0ad49a1bb9b86dc65",
+  "query_macro_accuracy": 0.7946179216555821,
+  "interpretation": "Raw confidence sweep; no CRC guarantee or held-out threshold claim.",
+  "answer_probability_mass": {
+    "mean": 0.9987968666571521,
+    "minimum": 0.9977498650550842,
+    "pairs_below_0_5": 0
+  },
+  "truncated_pairs": 0
+}

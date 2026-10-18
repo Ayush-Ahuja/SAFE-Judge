@@ -1,47 +1,58 @@
-# SAFE-Judge .gitignore
-
-# Python
+# Python and local environments
 __pycache__/
 *.py[cod]
 *.egg-info/
-dist/
-build/
-*.egg
-
-# Virtual environment
-venv/
 .venv/
+venv/
 env/
 
-# IDE
+# Generated packages, build products and local tools
+dist/
+build/
 .vscode/
 .idea/
+.ipynb_checkpoints/
 *.swp
 *.swo
-
-# Data (downloaded datasets are large)
-data/trec_dl_2019/
-data/trec_dl_2020/
-data/trec_covid/
-data/msmarco_train/
-data/runs/
-cache/
-
-# Results (keep figures, ignore large result dumps)
-results/pilot/*.json
-results/baselines/*.json
-results/safe_judge/*.json
-
-# Logs
-logs/
-
-# OS
+*.tmp
+*.bak
+*.aux
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+reports/*.log
+*.blg
+.pytest_cache/
+tmp/
 .DS_Store
 Thumbs.db
 
-# Jupyter
-.ipynb_checkpoints/
+# Downloaded data and model caches; retain only the published frozen pilot manifest
+cache/
+data/*
+!data/pilot/
+data/pilot/*
+!data/pilot/dl2019.jsonl
+!data/pilot/dl2019.metadata.json
 
-# Keep these directories
-!data/splits/.gitkeep
-!results/figures/.gitkeep
+# Publish only the completed Stage 2 run; new runs stay local until reviewed
+results/*
+!results/stage2/
+results/stage2/*
+!results/stage2/dl2019_qwen35_full_v1/
+# SQLite is a local resume artifact; raw scores and metadata are versioned
+results/stage2/*/checkpoint.sqlite3*
+results/stage2/*/run.lock
+
+# Runtime configuration, credentials and transient logs
+configs/colab.yaml
+configs/hpc.yaml
+hpc/environment.sh
+hpc/container.env
+hpc/project.txt
+logs/
+.env
+.env.*
+!.env.example

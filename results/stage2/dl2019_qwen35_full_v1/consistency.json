@@ -1,0 +1,13 @@
+{
+  "requested_pairs": 100,
+  "completed_pairs": 100,
+  "status": "complete",
+  "comparison": "Main-run batches versus batch size 1 in the same model session; not sampled self-consistency",
+  "seconds": 31.809305594000307,
+  "pairs": 100,
+  "changed_labels": 0,
+  "label_agreement": 1.0,
+  "mean_absolute_probability_difference": 0.0006804364174604416,
+  "max_absolute_probability_difference": 0.00416111946105957,
+  "changed_pair_ids": []
+}

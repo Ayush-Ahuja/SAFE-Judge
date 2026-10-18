@@ -1,0 +1,49 @@
+paths:
+  data_dir: ./data
+  results_dir: ./results
+  logs_dir: ./logs
+  cache_dir: ./cache
+  splits_dir: ./data/splits
+  runs_dir: ./data/runs
+assessor:
+  model_name: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  quantization: 4bit
+  compute_dtype: float16
+  max_length: 512
+  batch_size: 1
+teacher:
+  model_name: meta-llama/Llama-3.1-70B-Instruct
+  temperature: 3.0
+  top_k: 50
+safe_judge:
+  alpha: 0.05
+  per_class_thresholds: true
+  calibration_unit: query
+datasets:
+  trec_dl_2019:
+    ir_datasets_id: msmarco-passage/trec-dl-2019/judged
+    relevance_threshold: 2
+    role: source_calibration
+  trec_dl_2020:
+    ir_datasets_id: msmarco-passage/trec-dl-2020/judged
+    relevance_threshold: 2
+    role: source_test
+  trec_covid:
+    ir_datasets_id: cord19/trec-covid
+    relevance_threshold: 1
+    role: shifted_domain
+    n_blind_audit: 10
+    n_calibration: 10
+    n_test: 30
+    n_splits: 20
+  msmarco_train:
+    ir_datasets_id: msmarco-passage/train
+    role: training
+evaluation:
+  metric: ndcg_cut_10
+  tau_target: 0.9
+  coverage_target: 0.5
+  bootstrap_samples: 10000
+seed: 42
+num_seeds: 5

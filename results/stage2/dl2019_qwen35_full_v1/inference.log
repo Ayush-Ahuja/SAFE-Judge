@@ -1,0 +1,225 @@
+
+/usr/bin/python3 scripts/run_pilot.py --manifest /content/SAFE-Judge/data/pilot/dl2019.jsonl --config /content/SAFE-Judge/configs/colab.yaml --output-dir /content/SAFE-Judge/results/stage2/dl2019_qwen35_full_v1 --auto-batch --max-batch-size 16 --max-seconds 15846.931357464 --backup-dir /content/drive/MyDrive/SAFE-Judge/dl2019_qwen35_full_v1/results/stage2/dl2019_qwen35_full_v1 --backup-every-seconds 120 --consistency-pairs 100
+Selected 9260 pairs across 43 queries
+Resuming: 0 cached, 9260 remaining
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]
+Fetching 2 files:  50%|█████     | 1/2 [07:07<07:07, 427.57s/it]
+Fetching 2 files: 100%|██████████| 2/2 [08:11<00:00, 213.70s/it]
+Fetching 2 files: 100%|██████████| 2/2 [08:11<00:00, 245.78s/it]
+The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/723 [00:09<1:55:21,  9.59s/it]
+Loading weights:   1%|          | 6/723 [00:09<14:52,  1.25s/it]  
+Loading weights:   9%|▉         | 66/723 [00:10<00:52, 12.61it/s]
+Loading weights:  14%|█▍        | 104/723 [00:10<00:27, 22.30it/s]
+Loading weights:  18%|█▊        | 130/723 [00:11<00:23, 24.90it/s]
+Loading weights:  20%|██        | 148/723 [00:12<00:25, 22.37it/s]
+Loading weights:  22%|██▏       | 161/723 [00:12<00:27, 20.65it/s]
+Loading weights:  24%|██▎       | 170/723 [00:13<00:25, 21.95it/s]
+Loading weights:  24%|██▍       | 177/723 [00:13<00:28, 19.00it/s]
+Loading weights:  25%|██▌       | 183/723 [00:13<00:25, 20.78it/s]
+Loading weights:  26%|██▌       | 188/723 [00:14<00:34, 15.43it/s]
+Loading weights:  27%|██▋       | 196/723 [00:14<00:27, 19.05it/s]
+Loading weights:  28%|██▊       | 201/723 [00:15<00:37, 13.83it/s]
+Loading weights:  28%|██▊       | 205/723 [00:16<00:39, 13.09it/s]
+Loading weights:  29%|██▉       | 210/723 [00:16<00:34, 14.91it/s]
+Loading weights:  29%|██▉       | 213/723 [00:16<00:34, 14.82it/s]
+Loading weights:  30%|███       | 220/723 [00:16<00:25, 19.45it/s]
+Loading weights:  31%|███       | 223/723 [00:16<00:25, 19.30it/s]
+Loading weights:  31%|███▏      | 226/723 [00:17<00:41, 11.98it/s]
+Loading weights:  32%|███▏      | 234/723 [00:17<00:25, 19.02it/s]
+Loading weights:  33%|███▎      | 238/723 [00:17<00:31, 15.19it/s]
+Loading weights:  33%|███▎      | 241/723 [00:18<00:37, 12.79it/s]
+Loading weights:  34%|███▍      | 249/723 [00:18<00:24, 19.05it/s]
+Loading weights:  35%|███▍      | 253/723 [00:18<00:32, 14.45it/s]
+Loading weights:  35%|███▌      | 256/723 [00:19<00:34, 13.42it/s]
+Loading weights:  36%|███▌      | 258/723 [00:19<00:43, 10.74it/s]
+Loading weights:  36%|███▌      | 260/723 [00:19<00:39, 11.75it/s]
+Loading weights:  37%|███▋      | 265/723 [00:20<00:36, 12.70it/s]
+Loading weights:  38%|███▊      | 273/723 [00:20<00:22, 20.29it/s]
+Loading weights:  38%|███▊      | 276/723 [00:20<00:22, 19.44it/s]
+Loading weights:  39%|███▊      | 279/723 [00:21<00:38, 11.55it/s]
+Loading weights:  40%|███▉      | 287/723 [00:21<00:22, 19.02it/s]
+Loading weights:  40%|████      | 291/723 [00:21<00:29, 14.85it/s]
+Loading weights:  41%|████      | 294/723 [00:21<00:34, 12.51it/s]
+Loading weights:  42%|████▏     | 302/723 [00:22<00:22, 18.76it/s]
+Loading weights:  42%|████▏     | 306/723 [00:22<00:29, 14.33it/s]
+Loading weights:  43%|████▎     | 309/723 [00:22<00:31, 13.33it/s]
+Loading weights:  43%|████▎     | 311/723 [00:23<00:38, 10.70it/s]
+Loading weights:  44%|████▎     | 316/723 [00:23<00:30, 13.43it/s]
+Loading weights:  44%|████▍     | 318/723 [00:23<00:32, 12.29it/s]
+Loading weights:  45%|████▌     | 326/723 [00:23<00:20, 19.68it/s]
+Loading weights:  46%|████▌     | 329/723 [00:24<00:20, 19.18it/s]
+Loading weights:  46%|████▌     | 332/723 [00:24<00:33, 11.60it/s]
+Loading weights:  47%|████▋     | 340/723 [00:24<00:20, 18.69it/s]
+Loading weights:  48%|████▊     | 344/723 [00:25<00:25, 15.06it/s]
+Loading weights:  48%|████▊     | 347/723 [00:25<00:29, 12.55it/s]
+Loading weights:  49%|████▉     | 355/723 [00:25<00:19, 18.94it/s]
+Loading weights:  50%|████▉     | 358/723 [00:26<00:24, 14.70it/s]
+Loading weights:  50%|████▉     | 361/723 [00:26<00:29, 12.46it/s]
+Loading weights:  50%|█████     | 364/723 [00:26<00:32, 10.91it/s]
+Loading weights:  51%|█████     | 369/723 [00:27<00:26, 13.62it/s]
+Loading weights:  51%|█████▏    | 371/723 [00:27<00:28, 12.44it/s]
+Loading weights:  52%|█████▏    | 379/723 [00:27<00:17, 19.78it/s]
+Loading weights:  53%|█████▎    | 382/723 [00:27<00:17, 19.52it/s]
+Loading weights:  53%|█████▎    | 385/723 [00:28<00:28, 11.67it/s]
+Loading weights:  54%|█████▍    | 393/723 [00:28<00:17, 18.71it/s]
+Loading weights:  55%|█████▍    | 397/723 [00:28<00:21, 14.96it/s]
+Loading weights:  55%|█████▌    | 400/723 [00:29<00:25, 12.57it/s]
+Loading weights:  56%|█████▋    | 408/723 [00:29<00:16, 18.85it/s]
+Loading weights:  57%|█████▋    | 411/723 [00:29<00:21, 14.66it/s]
+Loading weights:  57%|█████▋    | 414/723 [00:30<00:25, 12.36it/s]
+Loading weights:  58%|█████▊    | 417/723 [00:30<00:27, 10.96it/s]
+Loading weights:  58%|█████▊    | 419/723 [00:30<00:25, 11.94it/s]
+Loading weights:  59%|█████▊    | 424/723 [00:30<00:23, 12.90it/s]
+Loading weights:  62%|██████▏   | 446/723 [00:31<00:07, 38.84it/s]
+Loading weights:  64%|██████▍   | 464/723 [00:31<00:04, 60.36it/s]
+Loading weights:  66%|██████▌   | 475/723 [00:31<00:03, 68.95it/s]
+Loading weights:  68%|██████▊   | 490/723 [00:31<00:02, 80.65it/s]
+Loading weights:  70%|██████▉   | 504/723 [00:31<00:02, 87.46it/s]
+Loading weights:  72%|███████▏  | 518/723 [00:31<00:02, 93.40it/s]
+Loading weights:  73%|███████▎  | 530/723 [00:31<00:01, 98.47it/s]
+Loading weights:  76%|███████▌  | 550/723 [00:31<00:01, 111.82it/s]
+Loading weights:  78%|███████▊  | 564/723 [00:31<00:01, 111.62it/s]
+Loading weights:  80%|███████▉  | 578/723 [00:32<00:01, 111.09it/s]
+Loading weights:  83%|████████▎ | 598/723 [00:32<00:01, 123.18it/s]
+Loading weights:  85%|████████▍ | 612/723 [00:32<00:00, 117.46it/s]
+Loading weights:  87%|████████▋ | 626/723 [00:32<00:00, 114.52it/s]
+Loading weights:  89%|████████▉ | 646/723 [00:32<00:00, 125.37it/s]
+Loading weights:  91%|█████████▏| 660/723 [00:32<00:00, 120.98it/s]
+Loading weights:  93%|█████████▎| 674/723 [00:32<00:00, 115.78it/s]
+Loading weights:  96%|█████████▌| 694/723 [00:33<00:00, 129.77it/s]
+Loading weights:  98%|█████████▊| 708/723 [00:33<00:00, 123.40it/s]
+Loading weights: 100%|█████████▉| 721/723 [00:33<00:00, 87.14it/s] 
+Loading weights: 100%|██████████| 723/723 [00:33<00:00, 21.62it/s]
+Selected batch size 8
+Estimated remaining inference: 42.7 minutes (excludes setup)
+Checkpointed 80/9260; batch size 8
+Checkpointed 152/9260; batch size 8
+Checkpointed 224/9260; batch size 8
+Checkpointed 296/9260; batch size 8
+Checkpointed 368/9260; batch size 8
+Checkpointed 440/9260; batch size 8
+Checkpointed 512/9260; batch size 8
+Checkpointed 584/9260; batch size 8
+Checkpointed 664/9260; batch size 8
+Checkpointed 744/9260; batch size 8
+Checkpointed 816/9260; batch size 8
+Checkpointed 888/9260; batch size 8
+Checkpointed 960/9260; batch size 8
+Checkpointed 1040/9260; batch size 8
+Checkpointed 1120/9260; batch size 8
+Checkpointed 1192/9260; batch size 8
+Checkpointed 1264/9260; batch size 8
+Checkpointed 1344/9260; batch size 8
+Checkpointed 1416/9260; batch size 8
+Checkpointed 1496/9260; batch size 8
+Checkpointed 1568/9260; batch size 8
+Checkpointed 1640/9260; batch size 8
+Checkpointed 1712/9260; batch size 8
+Checkpointed 1784/9260; batch size 8
+Checkpointed 1864/9260; batch size 8
+Checkpointed 1936/9260; batch size 8
+Checkpointed 2008/9260; batch size 8
+Checkpointed 2080/9260; batch size 8
+Checkpointed 2152/9260; batch size 8
+Checkpointed 2224/9260; batch size 8
+Checkpointed 2296/9260; batch size 8
+Checkpointed 2368/9260; batch size 8
+Checkpointed 2440/9260; batch size 8
+Checkpointed 2512/9260; batch size 8
+Checkpointed 2584/9260; batch size 8
+Checkpointed 2656/9260; batch size 8
+Checkpointed 2728/9260; batch size 8
+Checkpointed 2808/9260; batch size 8
+Checkpointed 2888/9260; batch size 8
+Checkpointed 2960/9260; batch size 8
+Checkpointed 3032/9260; batch size 8
+Checkpointed 3104/9260; batch size 8
+Checkpointed 3176/9260; batch size 8
+Checkpointed 3248/9260; batch size 8
+Checkpointed 3320/9260; batch size 8
+Checkpointed 3392/9260; batch size 8
+Checkpointed 3464/9260; batch size 8
+Checkpointed 3544/9260; batch size 8
+Checkpointed 3616/9260; batch size 8
+Checkpointed 3688/9260; batch size 8
+Checkpointed 3768/9260; batch size 8
+Checkpointed 3840/9260; batch size 8
+Checkpointed 3912/9260; batch size 8
+Checkpointed 3984/9260; batch size 8
+Checkpointed 4056/9260; batch size 8
+Checkpointed 4128/9260; batch size 8
+Checkpointed 4200/9260; batch size 8
+Checkpointed 4272/9260; batch size 8
+Checkpointed 4344/9260; batch size 8
+Checkpointed 4416/9260; batch size 8
+Checkpointed 4488/9260; batch size 8
+Checkpointed 4560/9260; batch size 8
+Checkpointed 4632/9260; batch size 8
+Checkpointed 4704/9260; batch size 8
+Checkpointed 4776/9260; batch size 8
+Checkpointed 4848/9260; batch size 8
+Checkpointed 4920/9260; batch size 8
+Checkpointed 4992/9260; batch size 8
+Checkpointed 5064/9260; batch size 8
+Checkpointed 5136/9260; batch size 8
+Checkpointed 5216/9260; batch size 8
+Checkpointed 5296/9260; batch size 8
+Checkpointed 5368/9260; batch size 8
+Checkpointed 5440/9260; batch size 8
+Checkpointed 5520/9260; batch size 8
+Checkpointed 5592/9260; batch size 8
+Checkpointed 5664/9260; batch size 8
+Checkpointed 5736/9260; batch size 8
+Checkpointed 5808/9260; batch size 8
+Checkpointed 5880/9260; batch size 8
+Checkpointed 5960/9260; batch size 8
+Checkpointed 6032/9260; batch size 8
+Checkpointed 6104/9260; batch size 8
+Checkpointed 6176/9260; batch size 8
+Checkpointed 6240/9260; batch size 8
+Checkpointed 6320/9260; batch size 8
+Checkpointed 6392/9260; batch size 8
+Checkpointed 6472/9260; batch size 8
+Checkpointed 6544/9260; batch size 8
+Checkpointed 6624/9260; batch size 8
+Checkpointed 6696/9260; batch size 8
+Checkpointed 6768/9260; batch size 8
+Checkpointed 6840/9260; batch size 8
+Checkpointed 6912/9260; batch size 8
+Checkpointed 6984/9260; batch size 8
+Checkpointed 7056/9260; batch size 8
+Checkpointed 7128/9260; batch size 8
+Checkpointed 7208/9260; batch size 8
+Checkpointed 7280/9260; batch size 8
+Checkpointed 7352/9260; batch size 8
+Checkpointed 7424/9260; batch size 8
+Checkpointed 7496/9260; batch size 8
+Checkpointed 7576/9260; batch size 8
+Checkpointed 7656/9260; batch size 8
+Checkpointed 7728/9260; batch size 8
+Checkpointed 7800/9260; batch size 8
+Checkpointed 7872/9260; batch size 8
+Checkpointed 7944/9260; batch size 8
+Checkpointed 8024/9260; batch size 8
+Checkpointed 8096/9260; batch size 8
+Checkpointed 8168/9260; batch size 8
+Checkpointed 8240/9260; batch size 8
+Checkpointed 8320/9260; batch size 8
+Checkpointed 8400/9260; batch size 8
+Checkpointed 8472/9260; batch size 8
+Checkpointed 8544/9260; batch size 8
+Checkpointed 8616/9260; batch size 8
+Checkpointed 8688/9260; batch size 8
+Checkpointed 8760/9260; batch size 8
+Checkpointed 8840/9260; batch size 8
+Checkpointed 8912/9260; batch size 8
+Checkpointed 8984/9260; batch size 8
+Checkpointed 9056/9260; batch size 8
+Checkpointed 9128/9260; batch size 8
+Checkpointed 9200/9260; batch size 8
+Checkpointed 9260/9260; batch size 8

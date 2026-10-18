@@ -1,63 +1,10 @@
-# SAFE-Judge Configuration
-# ========================
-
-# Paths
-paths:
-  data_dir: "./data"
-  results_dir: "./results"
-  logs_dir: "./logs"
-  cache_dir: "./cache"       # HuggingFace model cache
-  splits_dir: "./data/splits"
-  runs_dir: "./data/runs"
-
-# Assessor Model
+# Stage 2 scoring settings. The model revision matches the completed Colab run.
+# Historical runtime configuration is retained under the run's provenance directory.
 assessor:
-  model_name: "Qwen/Qwen3.5-4B"  # Compact 4B assessor
-  quantization: "4bit"                      # 4-bit QLoRA
+  model_name: "Qwen/Qwen3.5-4B"
+  revision: "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+  quantization: "4bit"
+  compute_dtype: "float16"
   max_length: 512
-  batch_size: 8
-
-# Teacher Model (used one-time for MS MARCO label generation)
-teacher:
-  model_name: "meta-llama/Llama-3.1-70B-Instruct"
-  temperature: 3.0
-  top_k: 50
-
-# SAFE-Judge CRC Parameters
-safe_judge:
-  alpha: 0.05                 # Target auto-error rate bound
-  per_class_thresholds: true  # Separate thresholds for rel/non-rel
-  calibration_unit: "query"   # "query" (ours) or "pair" (ablation)
-
-# Dataset Configuration
-datasets:
-  trec_dl_2019:
-    ir_datasets_id: "msmarco-passage/trec-dl-2019/judged"
-    relevance_threshold: 2    # grade >= 2 is relevant
-    role: "source_calibration"
-  trec_dl_2020:
-    ir_datasets_id: "msmarco-passage/trec-dl-2020/judged"
-    relevance_threshold: 2
-    role: "source_test"
-  trec_covid:
-    ir_datasets_id: "cord19/trec-covid"
-    relevance_threshold: 1    # grade >= 1 is relevant
-    role: "shifted_domain"
-    n_blind_audit: 10         # Topics reserved for final evaluation
-    n_calibration: 10         # Topics for calibration
-    n_test: 30                # Topics for testing
-    n_splits: 20              # Number of random topic splits
-  msmarco_train:
-    ir_datasets_id: "msmarco-passage/train"
-    role: "training"
-
-# Evaluation
-evaluation:
-  metric: "ndcg_cut_10"       # nDCG@10 for system ranking
-  tau_target: 0.90            # Target Kendall's tau
-  coverage_target: 0.50       # Target coverage (50%)
-  bootstrap_samples: 10000    # For significance testing
-
-# Reproducibility
+  batch_size: 1  # The notebook benchmarks batches 1/2/4/8/16 before full inference.
 seed: 42
-num_seeds: 5                  # Run with multiple seeds for robustness

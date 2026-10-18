@@ -1,0 +1,169 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{courier}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,tabularx}
+\usepackage[shortlabels]{enumitem}
+\usepackage{microtype}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=NavyBlue,citecolor=NavyBlue,urlcolor=NavyBlue]{hyperref}
+\usepackage{titlesec}
+\usepackage{float}
+
+\titleformat{\section}{\large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.6ex}{0.8ex}
+\titlespacing*{\subsection}{0pt}{1.1ex}{0.5ex}
+\setlist{itemsep=1pt,topsep=3pt,parsep=0pt}
+\setlength{\parskip}{3pt}
+\setlength{\parindent}{0pt}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\begin{document}
+
+%---------------- Report header ----------------
+\begin{center}
+{\small COL764: Information Retrieval and Web Search}\\[4pt]
+{\Large\bfseries Calibrated and Selective LLM Relevance Assessment\\[2pt] under Domain Shift}\\[6pt]
+{\large Stage 1 Report: Project Proposal}\\[8pt]
+\begin{tabular}{rl}
+\textbf{Name:} & Ayush Ahuja \\
+\textbf{Entry No.:} & 2023CS50911 \\
+\end{tabular}
+\end{center}
+\vspace{-2pt}
+\hrule
+\vspace{6pt}
+
+%=====================================================================
+\section{Introduction and Research Question}
+Building a test collection requires human relevance judgments, which are slow and expensive. Large language models (LLMs) can produce these judgments cheaply, and several studies show that LLM labels give system rankings close to those from human labels~\cite{faggioli2023,thomas2024,arabzadeh2025}. The same studies, however, show that LLM judges are lenient, sensitive to the wording of the prompt, poorly calibrated~\cite{tavakoli2025}, and easily misled by the presence of query terms~\cite{alaofi2026}. Work on the internal mechanisms of LLM relevance judgment~\cite{liu2025} shows the decision is formed in stages inside the model, which suggests the model's own output probabilities carry some signal about how reliable a judgment is. Replacing human assessors entirely is therefore risky, while keeping them for every pair is expensive.
+
+A natural middle ground is \emph{selective} assessment: the LLM labels the pairs it is confident about and sends (``escalates'') the rest to a human. LARA~\cite{lara2025} already does this under a fixed human budget. What is still missing is a way to know, \emph{before} looking at the gold labels, how many mistakes the automatic labels contain, and whether that estimate still holds when the assessor is moved to a new domain.
+
+\textbf{Research question.} \emph{Can a compact LLM relevance assessor know when it is unreliable, escalate only those query-document pairs to a human, and thereby reduce annotation effort while keeping (a) a stated upper bound on the error of its automatic labels and (b) the ranking of retrieval systems, even when moving from web search (TREC DL) to biomedical search (TREC-COVID)?}
+
+%=====================================================================
+\section{Primary Hypothesis and Backoff Formulation}
+
+\subsection{Setup}
+For each query--document pair $(q,d)$, a compact assessor (a 3B-parameter instruction-tuned LLM, adapted with 4-bit QLoRA so that it fits on one 16\,GB GPU) outputs a probability for each relevance grade. From these we obtain a predicted label $\hat{y}$ (relevant / non-relevant) and a confidence score $c(q,d)$. The pair is \textbf{auto-labelled} if $c(q,d)\ge\lambda$ and \textbf{escalated} to a human otherwise. In our experiments, the ``human'' answer is the official TREC (NIST) label, so escalation is simulated.
+
+Two quantities describe such a policy:
+\begin{itemize}
+  \item \textbf{Coverage}: the fraction of pairs that are auto-labelled. Coverage of 60\% means 60\% fewer human judgments.
+  \item \textbf{Selective risk}: the error rate \emph{among the auto-labelled pairs only}.
+\end{itemize}
+Raising $\lambda$ lowers risk but also lowers coverage. The proposed method, which we call \textbf{SAFE-Judge} (\emph{Selective Assessment with a Formal Error guarantee}), chooses $\lambda$ with Conformal Risk Control~\cite{crc}. This procedure needs a loss that can only grow as more pairs are auto-labelled, so we control the \textbf{auto-error rate}: the fraction of \emph{all} pairs that are auto-labelled \emph{and} wrong. It guarantees that the expected auto-error rate on new queries is at most a chosen $\alpha$ (we use $\alpha=0.05$), with a finite-sample correction of only about $1/(n+1)$ for $n$ calibration queries. At 50\% coverage, an auto-error rate of $0.05$ corresponds to a selective risk of $0.10$. We use this expected-value guarantee rather than a high-probability bound (as in Learn-then-Test~\cite{ltt}) because, with only tens of calibration queries, a high-probability bound would be so loose that almost no pair could be auto-labelled. SAFE-Judge differs from a standard application of this procedure in two IR-specific ways:
+\begin{enumerate}
+  \item \textbf{Queries, not pairs, are the calibration unit.} Pairs from the same query are strongly correlated, and new test collections always contain new queries. Treating pairs as independent (the usual assumption) is expected to make the guarantee fail on unseen queries.
+  \item \textbf{Separate thresholds for relevant and non-relevant predictions.} Relevant documents are rare and hard to judge. With one global threshold, the assessor could reach a low overall error by auto-labelling easy non-relevant pairs and escalating nearly every relevant one. Separate thresholds for pairs \emph{predicted} relevant and pairs predicted non-relevant bound the error within each predicted class.
+\end{enumerate}
+
+\subsection{Primary hypothesis (H1)}
+\emph{When SAFE-Judge thresholds are calibrated on TREC DL queries plus a small set of 10 TREC-COVID topics, the 3B assessor will, on held-out topics of both TREC DL and TREC-COVID, simultaneously achieve:}
+\begin{enumerate}[(a)]
+  \item \emph{an auto-error rate $\le 0.05$, and a selective risk $\le 0.20$ within each predicted class (pairs auto-labelled relevant / auto-labelled non-relevant), averaged over 20 random topic splits;}
+  \item \emph{coverage $\ge 50\%$, i.e.\ at least a 50\% reduction in human judgments;}
+  \item \emph{Kendall's $\tau \ge 0.90$ between the nDCG@10 ranking of all official TREC runs under the mixed (automatic + human) labels and under the full human labels;}
+\end{enumerate}
+\emph{and, at the same human budget, it will give a lower worst-class selective risk than LARA, with $\tau$ within $0.02$ of LARA's.}
+
+
+\subsection{Backoff formulation (H2)}
+The main risk is that the guarantee does not transfer from web to biomedical text, because the assessor may be confidently wrong on unfamiliar medical vocabulary. If the error on TREC-COVID exceeds the bound even after using 10 target-domain topics for calibration, or if coverage falls below 20\%, the project will be reformulated as a \textbf{study of calibration under shift}:
+\begin{itemize}
+  \item measure how realised error and coverage change as the number of TREC-COVID calibration topics grows ($k\in\{0,2,5,10,20\}$), i.e.\ how much target-domain labelling is needed before the bound becomes valid again;
+  \item compare choosing those target-domain pairs \emph{actively} (label the pairs the assessor is least sure about, in the spirit of LARA~\cite{lara2025}) against choosing them at random.
+\end{itemize}
+A clear negative result, showing when an assessor calibrated on one domain cannot be trusted on another, is still a useful finding for anyone building a new test collection.
+
+%=====================================================================
+\section{Closest Work and Novelty}
+
+\textbf{1. LARA: LLM-Assisted Relevance Assessments (Takehi et al., SIGIR 2025)~\cite{lara2025}.}
+LARA uses an LLM's predicted relevance probabilities to decide which documents humans should judge under a fixed budget. It actively learns a calibration model from those human labels and uses it to correct the LLM's labels for the remaining documents. It outperforms manual-only, LLM-only and active-learning baselines on TREC-7, TREC-8, Robust04 and TREC-COVID, measured by Kendall's $\tau$. \emph{Limitation:} it gives no guarantee on how many automatic labels are wrong, uses 8B/70B LLMs, and fits calibration separately on each collection, so transfer across domains is not studied.
+
+\textbf{2. Trust or Escalate (Jung, Brahman \& Choi, ICLR 2025)~\cite{jung2025}.}
+This work proposes cascaded selective evaluation for LLM-as-a-judge: a judge answers only when confident, otherwise it escalates to a stronger judge, and a statistical test gives a provable lower bound on agreement with humans. \emph{Limitation:} it targets pairwise preference judgments of generated text, assumes independent items, controls only overall agreement (not per class), and evaluates label agreement rather than the ranking of retrieval systems. It is not applied to IR test collections or to domain shift.
+
+\textbf{3. DIRAS (Ni et al., NAACL 2025)~\cite{diras2025}.}
+DIRAS fine-tunes open LLMs of 8B parameters or fewer on labels from a GPT-4 teacher to act as relevance annotators that output a binary verdict and a well-calibrated relevance score. It shows that compact models can reach GPT-4-level annotation quality with good calibration. \emph{Limitation:} calibration is only reported; it is not used to decide which pairs to escalate, and there is no error guarantee or evaluation on the ranking of TREC runs.
+
+\textbf{Novelty.}
+None of these works gives an error guarantee that is valid for IR test-collection construction. LARA escalates without a guarantee; Trust or Escalate has a guarantee but under assumptions that do not hold for relevance judgments (independent pairs, balanced classes, no system ranking); DIRAS has a calibrated compact model but no escalation policy. This project combines these ideas and adapts them to IR: (i) the guarantee is calibrated at the \emph{query level}, matching how test collections are built and reused; (ii) it holds \emph{separately for relevant and non-relevant labels}, so savings do not come from escalating all hard relevant documents; (iii) success is measured by whether the \emph{ranking of official TREC runs} is preserved, not by pair-level accuracy; and (iv) the guarantee is tested under a \emph{web$\rightarrow$biomedical domain shift} with a 3B model that runs on modest hardware. The contribution is a new escalation policy and evaluation methodology; the LLM is kept fixed across all compared methods.
+
+%=====================================================================
+\section{Benchmark and Split Plan}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}P{3.1cm} P{2.2cm} Y Y@{}}
+\toprule
+\textbf{Collection} & \textbf{Role} & \textbf{What is used} & \textbf{Split} \\
+\midrule
+MS MARCO passage (training set) & Training the assessor & Training queries with their official relevant passages, plus graded labels for retrieved negatives produced once by a larger open LLM & Separate train/dev queries; no overlap with any TREC DL or TREC-COVID topic \\
+TREC DL 2019 and 2020 (passage) & Source domain (web search) & Graded 0--3 human labels and official submitted runs & Calibrate on DL 2019 and test on DL 2020, then swap \\
+TREC-COVID (Round 5, cumulative) & Shifted domain (biomedical) & 50 topics over CORD-19 abstracts, graded 0--2 human labels, official Round-5 runs & 10 topics kept as a blind audit set; the other 40 split into 10 calibration / 30 test topics, repeated over 20 random splits \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Why these benchmarks.} TREC DL has deeply judged, graded labels and many submitted runs from both classical (BM25-style) and neural systems, which makes system-ranking agreement meaningful. TREC-COVID is a real domain shift (scientific abstracts, medical vocabulary, far more relevant documents per topic) and was also used by LARA, allowing a direct comparison. Relevance is binarised in the standard way: grade $\ge2$ is relevant for TREC DL and grade $\ge1$ for TREC-COVID.
+
+\textbf{Split rules.}
+\begin{itemize}
+  \item All splits are made \textbf{by query, never by query--document pair}. Splitting by pair would put pairs of the same query in both calibration and test data and make the error bound look better than it really is.
+  \item The assessor labels only pairs in the official judged pool, so every automatic label can be checked against a human label.
+  \item The 10 blind audit topics of TREC-COVID are not used until the final evaluation.
+\end{itemize}
+
+\textbf{Leakage and contamination risks, and how they are handled.}
+\begin{itemize}
+  \item \textbf{Pre-training contamination.} TREC DL and TREC-COVID labels have been public since 2019--2020 and may be part of an LLM's pre-training data. Following Thomas et al.~\cite{thomas2024}, we will check whether the model can predict relevance from the topic and document \emph{ID alone} (without the text). Above-chance accuracy would indicate memorisation, and affected topics will be reported separately.
+  \item \textbf{Training leakage.} The assessor and the teacher LLM see only MS MARCO \emph{training} queries, never any evaluation topic.
+  \item \textbf{Tuning leakage.} Prompts, the target auto-error rate $\alpha$ and the per-class limit are fixed using TREC DL 2019 only, before any TREC-COVID test topic is scored.
+  \item \textbf{Circularity.} Some submitted runs use neural or LLM re-rankers, and LLM judges may favour certain system types~\cite{alaofi2026}. Results will be reported separately for classical and neural runs.
+\end{itemize}
+
+%=====================================================================
+\section{Baselines to Be Reproduced}
+All baselines are compared at the \textbf{same human budget} (the same fraction of escalated pairs), and all are evaluated on the same splits.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}P{2.2cm} P{3.4cm} Y@{}}
+\toprule
+\textbf{Type} & \textbf{Baseline} & \textbf{Description and reason for choice} \\
+\midrule
+Classical & Active learning with lexical features & A logistic-regression relevance model on lexical features (BM25 score, query-term overlap, document length), trained by uncertainty sampling: humans label the pairs the model is least sure about, the rest are labelled automatically. This is the standard non-neural approach to reducing judgment effort and is included in LARA's comparisons~\cite{lara2025}. \\
+Neural & Cross-encoder with temperature scaling & A MiniLM cross-encoder trained on MS MARCO scores each pair; its scores are calibrated with temperature scaling on the calibration topics, and pairs below a confidence threshold are escalated. This tests whether a small non-generative neural model is already sufficient. \\
+Recent (strongest) & \textbf{LARA}~\cite{lara2025} & The closest and strongest existing method. It will be reproduced from the authors' public code, first in their own setting (TREC-COVID, 8B LLM) to confirm their reported $\tau$-vs-budget trend, and then with our 3B assessor for a fair comparison. \\
+Recent & Zero-shot LLM with naive confidence threshold & The same LLM prompted zero-shot with an UMBRELA-style graded relevance prompt~\cite{umbrela}, escalating by raw output probability without any calibration or guarantee. This isolates the value of SAFE-Judge's risk control. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+As a reference point, we also report \textbf{full automation} (every pair labelled by the LLM, 0\% human effort), which is the setting evaluated in most prior work~\cite{faggioli2023,thomas2024,arabzadeh2025}.
+
+%=====================================================================
+\small
+\begin{thebibliography}{99}\setlength{\itemsep}{0pt}
+\bibitem{alaofi2026} M.~Alaofi, P.~Thomas, F.~Scholer, M.~Sanderson. On the Use of LLMs for Relevance Labelling. \emph{ACM TOIS} 44(4), 2026.
+\bibitem{ltt} A.~N.~Angelopoulos, S.~Bates, E.~J.~Cand\`es, M.~I.~Jordan, L.~Lei. Learn then Test: Calibrating Predictive Algorithms to Achieve Risk Control. arXiv:2110.01052, 2021.
+\bibitem{crc} A.~N.~Angelopoulos, S.~Bates, A.~Fisch, L.~Lei, T.~Schuster. Conformal Risk Control. \emph{ICLR} 2024.
+\bibitem{arabzadeh2025} N.~Arabzadeh, C.~L.~A.~Clarke. Benchmarking LLM-based Relevance Judgment Methods. \emph{SIGIR} 2025.
+\bibitem{faggioli2023} G.~Faggioli, L.~Dietz, C.~L.~A.~Clarke, et al. Perspectives on Large Language Models for Relevance Judgment. \emph{ICTIR} 2023.
+\bibitem{jung2025} J.~Jung, F.~Brahman, Y.~Choi. Trust or Escalate: LLM Judges with Provable Guarantees for Human Agreement. \emph{ICLR} 2025.
+\bibitem{liu2025} Q.~Liu, H.~Duan, J.~Mao, J.-R.~Wen. How Do Large Language Models Understand Relevance? A Mechanistic Interpretability Perspective. \emph{ACM TOIS} 44(2), 2025.
+\bibitem{diras2025} J.~Ni, T.~Schimanski, M.~Lin, M.~Sachan, E.~Ash, M.~Leippold. DIRAS: Efficient LLM Annotation of Document Relevance for Retrieval Augmented Generation. \emph{NAACL} 2025.
+\bibitem{lara2025} R.~Takehi, E.~M.~Voorhees, T.~Sakai, I.~Soboroff. LLM-Assisted Relevance Assessments: When Should We Ask LLMs for Help? \emph{SIGIR} 2025.
+\bibitem{tavakoli2025} L.~Tavakoli, H.~Zamani. Reliable Annotations with Less Effort: Evaluating LLM-Human Collaboration in Search Clarifications. \emph{ICTIR} 2025.
+\bibitem{thomas2024} P.~Thomas, S.~Spielman, N.~Craswell, B.~Mitra. Large Language Models can Accurately Predict Searcher Preferences. \emph{SIGIR} 2024.
+\bibitem{umbrela} S.~Upadhyay, R.~Pradeep, N.~Thakur, N.~Craswell, J.~Lin. UMBRELA: UMbrela is the (Open-Source Reproduction of the) Bing RELevance Assessor. arXiv:2406.06519, 2024.
+\end{thebibliography}
+\end{document}
