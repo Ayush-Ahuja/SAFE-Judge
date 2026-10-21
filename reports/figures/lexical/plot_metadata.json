@@ -1,0 +1,42 @@
+{
+  "plotter_sha256": "f8e6da39b7ce40b52cb2dffadbd159177696f0f8722fdddaf9b1bb56ed19f553",
+  "inputs_sha256": {
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lexical\\dl2019_full_v2\\budget_curve.csv": "42358ce0b5e39fb8a0d60ae68a3f425bc887b03d25741f40972a49c9ab7380ec",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lexical\\dl2019_full_v2\\experiment.json": "e72f2bda459ba59d213b411faf6e9862c0322e7072d658d2c66bac80f961ec22",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lexical\\dl2019_full_v2\\seed_42\\budget_004630\\summary.json": "d68d7277cce8a41aeeafeb165b5cb870eee9e46f3d7ad5b4b4c3b918b7e32b8b",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lexical\\dl2019_full_v2\\seed_43\\budget_004630\\summary.json": "b61b006c9a1c713854728d8f76caaf9e704fe3ce6987f2c28c116eb020810e1d",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lexical\\dl2019_full_v2\\seed_44\\budget_004630\\summary.json": "bbb1dd8fc43b4c8c4f4ab8ea22c9645b99a0b0f1a5630090947bee62e450df21",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lexical\\dl2019_shared_test_v1\\budget_curve.csv": "b007417902e406339e237faf821a8284f562693d482a2dc66c340ffdb55a5e9e",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lexical\\dl2019_shared_test_v1\\experiment.json": "cc9dfbc5a4cb1b335d140f38ea6f34ea59d57774e5904e188bf1103c28ffd0fe",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lexical\\dl2019_shared_test_v1\\seed_42\\budget_003664\\summary.json": "192d134a97690d3fd0a3abba6098ec0a71cf7f0ca3d6444ee85662e9a60ab367",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lexical\\dl2019_shared_test_v1\\seed_43\\budget_003664\\summary.json": "fdb329cba57d4830c86e223441c09aa32affec5bd2aa4ca88c3fa3e013c46d75",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lexical\\dl2019_shared_test_v1\\seed_44\\budget_003664\\summary.json": "d12c678f34c4fa3c95f9ffa1bc04783d9d1514ba01dbc8cdfcf4002ba078cbed"
+  },
+  "outputs_sha256": {
+    "overview.png": "5efd734fc3a753f10dae2c28d1105d1858a349bf9bf24ebeac735c70157473f4",
+    "overview.svg": "f7c82a3a15117d4642e2e7ae9facc3c69677bf25804b6ed908036e7705e44bdb",
+    "risk_coverage.png": "d21f8fdb8ab035ed7da912b2a7aad903d4418004396a938e335eca24230907a8",
+    "risk_coverage.svg": "bec23d51b00768a02065dd3b432bbb40f358e53e7ba8c24f31f71a38d911fe79",
+    "auto_error_budget.png": "c0789f968d5d343b00e40f2d73f4ec9cf7cda2b91ec7ef750244fcefd766e66c",
+    "auto_error_budget.svg": "384d125ddde5b3e23fe29a5ba4b65821b5e09131ed7abc575feb7c40e1f73e9d",
+    "mixed_accuracy_budget.png": "0489a518fb10f988d6e9b3d771501abe28638b55ca6272a3f39a1b753ca2c134",
+    "mixed_accuracy_budget.svg": "08b769ae2652b8313052b2c62d33759a95b3de66bce5e6057488d40bf45cc3f3",
+    "class_composition.png": "9d7fcb17e79ad44f3e320ba76d74e55f897a8d05507ced4b72a11a7de84e1ed0",
+    "class_composition.svg": "20f81207d156e9bbae21a8dacc9b5bec8d227c0d00f59703d52e748f16afc661"
+  },
+  "matplotlib": "3.10.1",
+  "seeds": [
+    [
+      42,
+      43,
+      44
+    ],
+    [
+      42,
+      43,
+      44
+    ]
+  ],
+  "uncertainty": "range across seeds, not a confidence interval",
+  "excluded": "untrained zero-budget endpoint; undefined selective risk at full human budget"
+}

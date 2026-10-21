@@ -1,0 +1,2 @@
+-r requirements-lexical.txt
+matplotlib==3.10.1

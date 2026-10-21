@@ -1,0 +1,10 @@
+{
+  "seed_size": 50,
+  "batch_size": 50,
+  "regularization_c": 1.0,
+  "max_iter": 2000,
+  "bm25_k1": 1.2,
+  "bm25_b": 0.75,
+  "budget_fractions": [0.0, 0.01, 0.05, 0.1, 0.2, 0.5, 1.0],
+  "seeds": [42, 43, 44]
+}
