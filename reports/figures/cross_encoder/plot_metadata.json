@@ -1,0 +1,39 @@
+{
+  "plotter_sha256": "51afa77b403f27bc37eefca1d00b0997bdc07713fe10e3b23352d604bc90de77",
+  "inputs_sha256": {
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\experiment.json": "93e9adef3463c6fd21605e0eb4651da3f4d50e5e6d2a43f68315b54cb0ed1be1",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_42\\budget_001932\\summary.json": "cf13991f1083d160ad4d957b16c989c8c1c1cd7371b9d842ffc268f05f85ccac",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_42\\budget_002198\\summary.json": "a085c6bd41ae7c07da62c3c6c9a5749d35c0b2cc65823719272248f0e08eca91",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_42\\budget_003664\\summary.json": "1e10fdd58a14e94ca609ce21c5f1b41d08a1c952979775c6e4c6783db2de7dc2",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_42\\budget_005496\\summary.json": "880a4fc2077e6134c62fcb688fb14e8a720dad56490be23f3f7fd4581fa19ec2",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_42\\budget_007328\\summary.json": "3f57fed4becae9f440449bdcafcb844afc4ca133b5fd2cf0d47dffe941485775",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_42\\budget_009260\\summary.json": "85fa69aebdef4509b556ead7f6c76f3b33b4bf9041f826c272995760c0610524",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_43\\budget_001932\\summary.json": "3641627ee2fd89ad3d7d10ad920e263554b91d68fd1e5e00739bd58113dc1456",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_43\\budget_002198\\summary.json": "a95337bf479d9f0719977233f1bb896ab9e9e5f9578bca4be0a94d7e0fb9fc29",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_43\\budget_003664\\summary.json": "bcd1dc65b9223b9705df19ab6395646b5a169dc3452bc67f3ff6ee4a3ad98089",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_43\\budget_005496\\summary.json": "09af2b7262e11cfeb1662b97b20a34b8e400a40be7accabbc9c5f01c73e8883b",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_43\\budget_007328\\summary.json": "9ccca92b02565b1e14e74bd4cf9de16cc3627784baf641c5d8655a1d7134248a",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_43\\budget_009260\\summary.json": "3ac1a5fb8c7a548d23f83a7b4f794042808a0e7fcd86d7537e508c26a739cf3d",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_44\\budget_001932\\summary.json": "becf21dc7b2bb7d762270f43d48b7001770bdcaaad9520a3cce13af40705a53f",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_44\\budget_002198\\summary.json": "99bb459b19d2245f7216fb05762687670b573529e1b230a743488fdfdcb5a79b",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_44\\budget_003664\\summary.json": "b38d68d9059937d74d847b19ac8fe7c123e8ae8fbc8ca9919073707ba58b3756",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_44\\budget_005496\\summary.json": "c1fd1fc47bd6275ea89673899b622a00b394baa87214d24e82e60fdded2097ab",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_44\\budget_007328\\summary.json": "7e121d2079e414671e5cbd3c20e46e083cddd1ec8978e03b533c549a7c27570e",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\seed_44\\budget_009260\\summary.json": "d8a76dd1521511d177d1f54c720a71c2217e3d9d0a9df58b418b2ddc77dd8349",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\raw_reliability.csv": "3a3099fab67ab88466426e536d928cabce2d9843f1254bc8afb0490d6aae2cb0",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\cross_encoder\\dl2019_shared_test_v1\\temperature_scaled_reliability.csv": "daf6c2d9ca39d3be218a19208fb481c7c3212e1a0568fcfe9e6760648e03da04"
+  },
+  "outputs_sha256": {
+    "overview.png": "475374eb0d174f5d2f4a36c2bca26fee59a1e70507cf34d6b19672b292eb1c8d",
+    "overview.svg": "6e06c13d21571589d7da2aa617e6ea696d4bae9c47e55e55d838ed192e7a8daa",
+    "reliability.png": "b6d830660cc5db28c866cd00fba33d54182fecc8a71584d1f00232566eeaa074",
+    "reliability.svg": "d02f4d2f14a39fffd10fca95b192ec3821489e3149951b2fb075a29998e34e7d",
+    "risk_coverage.png": "3eabd3d70947188df38f78dbb1f9efa126c5be1863b907fb92127593c4067e96",
+    "risk_coverage.svg": "6591fef5977a69c3b57c15d18edc4944cca0fc282fdbf5acc26decbc790a25ac",
+    "auto_error_budget.png": "7fbbff4f2eefb63c0c1f9377a36271fa67091d55cbc226a284a6452e7ac1168b",
+    "auto_error_budget.svg": "96be3fd4fd6c4148844918d82da48feffe36d26c628b720fa7bedef413cdbbff",
+    "class_risk.png": "f56b24e6d904737660009f7e744921006b6a1a3817eaf3dd9715e2efe44edfd4",
+    "class_risk.svg": "3936b1bb06eedee8c1a44566636bddde311ebc654e382e699c0a555190d7d200"
+  },
+  "uncertainty": "seed tie-break range, not confidence intervals"
+}

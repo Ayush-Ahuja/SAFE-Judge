@@ -40,6 +40,16 @@ binary qrels and optional system-ranking evaluation. The
 protocol and experiment commands. The
 [validation record](docs/lexical_baseline_validation.md) describes completed checks.
 
+## Calibrated neural cross-encoder
+
+The neural baseline uses a pinned MS MARCO MiniLM cross-encoder with positive
+temperature scaling on disjoint calibration queries and confidence-based human
+escalation. Raw model scores are cached once; evaluation supports shared splits,
+source/target collections, calibration-inclusive human budgets and the same binary
+qrels and ranking metrics as the lexical baseline. The
+[method and execution guide](docs/cross_encoder.md) describes the protocol, and the
+[validation record](docs/cross_encoder_validation.md) documents measured checks.
+
 ## Repository layout
 
 | Path | Contents |
@@ -60,14 +70,16 @@ protocol and experiment commands. The
 The [CI workflow](.github/workflows/ci.yml) runs on pushes, pull requests and manual
 dispatches in GitHub Actions. It checks Python 3.12 on GitHub-hosted Ubuntu and
 Windows machines, installs the CPU test/plot dependencies, validates the frozen
-DL2019 manifest, runs all offline tests and checks plotting CLI imports. Dependency
+DL2019 manifest, runs all offline tests and checks plotting and cross-encoder CLI
+imports. Dependency
 downloads are cached. The checks require no GPU, model weights, API keys or new
 datasets. Full inference and experiment sweeps are independent of CI.
 
 ## CPU validation
 
-Manifest validation needs only Python. The full test suite also covers the lexical
-baseline and requires its CPU dependencies. The following commands perform local
+Manifest validation needs only Python. The full test suite covers both baselines
+using the lightweight CPU dependencies; cross-encoder scoring is tested with a
+synthetic backend. The following commands perform local
 validation from the repository root:
 
 ```bash

@@ -59,3 +59,12 @@ jobs:
 
       - name: Check plotting CLI imports
         run: python scripts/plot_lexical_baseline.py --help
+
+      - name: Check cached cross-encoder evaluation CLI
+        run: python scripts/run_cross_encoder_baseline.py --help
+
+      - name: Check cross-encoder scoring CLI without model loading
+        run: python scripts/score_cross_encoder.py --help
+
+      - name: Check cross-encoder plotting CLI imports
+        run: python scripts/plot_cross_encoder_baseline.py --help
