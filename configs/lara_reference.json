@@ -1,0 +1,10 @@
+{
+  "repository": "https://github.com/RikiyaT/LARA",
+  "commit": "482cb834c103a043b932a6e22d988945be5832bd",
+  "files": {
+    "src/utils/algo.py": "d5d83b8795d1a07bbfe6b6d16e9df4ce5631f03ee79e398573d45d9be3f3aa53",
+    "src/test-al.py": "0796d26fa51a4c742614af9ce5d743d08669c17f2646e99c5525caa60b72ec91"
+  },
+  "binary_symbols": ["GradualLogisticRegression", "ours", "ours_groups"],
+  "driver_symbol": "smooth_normalize"
+}

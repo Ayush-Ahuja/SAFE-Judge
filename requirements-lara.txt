@@ -1,0 +1,2 @@
+# LARA operates on cached LLM probabilities; no GPU or inference libraries.
+-r requirements-lexical.txt

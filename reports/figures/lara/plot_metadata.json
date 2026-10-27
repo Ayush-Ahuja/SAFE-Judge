@@ -1,0 +1,32 @@
+{
+  "plotter_sha256": "daa8f20c62c5e8f8876c5a41715568df9bb74ba61f9c3cae0dba11815ac5410b",
+  "inputs_sha256": {
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lara\\dl2019_shared_test_v1\\experiment.json": "889a93914172bb3d12f9fe3fb665262bb360fdfb6dfd133e1cbdb21b2b4168a6",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lara\\dl2019_shared_test_v1\\budget_curve.csv": "a2e4a7873374a81fe3f1dedc754b3dfcca6c8db6a7c80f6d0b9d4acbc810c5b4",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lara\\dl2019_shared_test_v1\\groups_1\\seed_42\\budget_003664\\summary.json": "6c55a14c9ba0c7f5551938690b4821bd22cc15e15dff7ec7106f53675f205357",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lara\\dl2019_shared_test_v1\\groups_1\\seed_43\\budget_003664\\summary.json": "a79736661fd7cf9cd7ebe2af643f2f64b5e3e51c27a20e2f2c98d842435db585",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lara\\dl2019_shared_test_v1\\groups_1\\seed_44\\budget_003664\\summary.json": "89d1ccbbc960956120525859256c7d2284385b473b72ee8d1b525f5e8c0d706e",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lara\\dl2019_shared_test_v1\\groups_1\\seed_42\\budget_003664\\predictions.csv": "3a783f33fd42de8e27009e2668f395da5cbfb8ffb4006390d1049c6bb1b04e9c",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lara\\dl2019_shared_test_v1\\groups_3\\seed_42\\budget_003664\\summary.json": "11c783707c5646eddd029f1ff5d6e6804d4c3b385736e2d0bc37f95fbb9ba6cc",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lara\\dl2019_shared_test_v1\\groups_3\\seed_43\\budget_003664\\summary.json": "c2e08b135a673248fc866bd37468d86b7271610c77211942210ce8d16cd5cb6c",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lara\\dl2019_shared_test_v1\\groups_3\\seed_44\\budget_003664\\summary.json": "54e8822fd1888273d2ec21176780ee59f205e200bb8e5bf35e383d7d1a14dade",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lara\\dl2019_shared_test_v1\\groups_3\\seed_42\\budget_003664\\predictions.csv": "45ae9f2902a4f7972f8764388f557aeb43c0611fcda12edeb3a3ac00c7cbbe87",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lara\\dl2019_shared_test_v1\\groups_topics\\seed_42\\budget_003664\\summary.json": "51416a8525316bf56eaf287dd7bda7dfc7cd3aa40dd953cdade808082f54a3a5",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lara\\dl2019_shared_test_v1\\groups_topics\\seed_43\\budget_003664\\summary.json": "02fd44eeffbb38e0dee725eaf4bbb7d18b63c1822d5eba2bcc0566644344e659",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lara\\dl2019_shared_test_v1\\groups_topics\\seed_44\\budget_003664\\summary.json": "6222079b349a56efc1c4748fb9b1c635d686f658ca9d4dd3fa94e2329e20b484",
+    "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge\\results\\baselines\\lara\\dl2019_shared_test_v1\\groups_topics\\seed_42\\budget_003664\\predictions.csv": "564859bb69bb2ccdd9da7c2b137d2b9b10aff8d9dc66899fc95b9e35dbe6daae"
+  },
+  "outputs_sha256": {
+    "overview.png": "abbb1d33c79e86b2d4568b9e40dd6455a8ec6a0da4e46fe37fe6702d07f73eed",
+    "overview.svg": "8e81a59dd31c1e6f385147e082917f4680cc8e4ce252dffffabfd3e6fc727336",
+    "risk_coverage.png": "df587f33031c0a0061cf4728ed74bad9c7c858c1b7b024f8096330ff3e25fb09",
+    "risk_coverage.svg": "11726df056273f2609f36bc3378dbd3313d902c0f36ec493f8ece92150c1bef0",
+    "auto_error_budget.png": "625d4b7218916b99d1c8d7ca10e5de9f5f855ebe2944919fecdba83be037574b",
+    "auto_error_budget.svg": "6dba58627fbf415c360dc3e1cec56d745bdc09d20f6f829de712403f3cee5a35",
+    "class_risk.png": "b2ecb44c89a46cd4e244c282a6179b1af924ccc27828969c0e6eb921f2cc51ca",
+    "class_risk.svg": "6300bba556262c661d456042ddfcb984bffefa59b628be042384e2e4b421612e",
+    "calibration_mapping.png": "4f1dbf52c211fe247c9520e4512f4aa42e2c13737afc2a1b48d9182a68189221",
+    "calibration_mapping.svg": "e83c94c942d985e4186aa2ca62ab55612fd7cb2830d2f1d792691771047553f2"
+  },
+  "uncertainty": "ranges across grouping seeds, not confidence intervals"
+}

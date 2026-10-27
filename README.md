@@ -50,6 +50,15 @@ qrels and ranking metrics as the lexical baseline. The
 [method and execution guide](docs/cross_encoder.md) describes the protocol, and the
 [validation record](docs/cross_encoder_validation.md) documents measured checks.
 
+## LARA
+
+The binary LARA baseline combines cached LLM probabilities with online calibration
+and budgeted human judgments. Global, three-group and per-topic variants use the
+pinned authors' binary implementation semantics, with reference parity checks,
+exact annotation budgets and the same binary evaluation outputs as the other
+baselines. The [method guide](docs/lara.md) and [validation record](docs/lara_validation.md)
+describe the implementation, measured Qwen/DL2019 adaptation and reproduction scope.
+
 ## Repository layout
 
 | Path | Contents |

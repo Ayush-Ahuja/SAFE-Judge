@@ -1,0 +1,3 @@
+# Optional direct comparison against the authors' pandas-based functions.
+-r requirements-lara.txt
+pandas==2.2.3

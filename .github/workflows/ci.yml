@@ -44,9 +44,10 @@ jobs:
           cache-dependency-path: |
             requirements-lexical.txt
             requirements-lexical-plots.txt
+            requirements-lara.txt
 
       - name: Install CPU dependencies
-        run: python -m pip install -r requirements-lexical-plots.txt
+        run: python -m pip install -r requirements-lexical-plots.txt -r requirements-lara.txt
 
       - name: Check dependency consistency
         run: python -m pip check
@@ -68,3 +69,12 @@ jobs:
 
       - name: Check cross-encoder plotting CLI imports
         run: python scripts/plot_cross_encoder_baseline.py --help
+
+      - name: Check LARA evaluation CLI imports
+        run: python scripts/run_lara_baseline.py --help
+
+      - name: Check LARA plotting CLI imports
+        run: python scripts/plot_lara_baseline.py --help
+
+      - name: Check optional LARA reference verifier CLI
+        run: python scripts/verify_lara_reference.py --help
