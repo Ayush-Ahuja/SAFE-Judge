@@ -21,7 +21,7 @@ sys.path.insert(0, str(ROOT))
 from scripts.run_error_predictor_ablation import aggregate, complete_budget
 from src.baselines.active_learning import LabelOracle
 from src.baselines.lara import LaraConfig, run_lara
-from src.calibration.diagnostic_review import ReviewConfig, run_diagnostic_review
+from src.calibration.safe_judge import SafeJudgeConfig, run_safe_judge
 from src.evaluation.review_metrics import PolicyEvaluator
 from src.utils.io import atomic_text, file_hash, pair_key, read_manifest, write_csv, write_json
 
@@ -91,7 +91,7 @@ def execute(args):
         raise AssertionError("Calibration/test query overlap")
     args.output_dir.mkdir(parents=True, exist_ok=False)
     shutil.copyfile(args.config, args.output_dir/"configuration.json")
-    sources = [Path(__file__), ROOT/"src/calibration/diagnostic_review.py", ROOT/"src/evaluation/review_metrics.py",
+    sources = [Path(__file__), ROOT/"src/calibration/safe_judge.py", ROOT/"src/evaluation/review_metrics.py",
                ROOT/"scripts/run_error_predictor_ablation.py", ROOT/"src/baselines/lara.py", ROOT/"src/baselines/active_learning.py"]
     metadata = {"status": "running", "settings": settings, "inputs": {"web": dl_source, "biomedical": covid_source},
                 "source_calibration_query_ids": source_ids, "source_calibration_labels": len(source_labels),
@@ -107,7 +107,7 @@ def execute(args):
                 "confirmatory_limit": "New biomedical topics for policy evaluation; web benchmark already explored. Pilot-informed test-query adaptation is not zero-shot prediction."}
     write_json(args.output_dir/"experiment.json", metadata)
     records, per_query, logs, calibration_metrics = [], [], [], []
-    base = ReviewConfig(**settings["review_config"])
+    base = SafeJudgeConfig(**settings["review_config"])
     start = time.perf_counter()
     for cohort, rows in cohorts.items():
         rows = sorted(rows, key=pair_key)
@@ -145,7 +145,7 @@ def execute(args):
                 for method, config in (("diagnostic_primary", base),
                                        ("diagnostic_no_repair", replace(base, repair_labels=False)),
                                        ("diagnostic_shared_only", replace(base, global_only=True))):
-                    human, predicted, error, acquired, state = run_diagnostic_review(raw_pool, LabelOracle(labels, budget), budget, config, seed)
+                    human, predicted, error, acquired, state = run_safe_judge(raw_pool, LabelOracle(labels, budget), budget, config, seed)
                     record(method, human, predicted, 0, state, error)
                     logs.append(json.dumps({"cohort": cohort, "seed": seed, "budget": budget, "method": method, "acquisitions": acquired}))
                 for preprocessing in ("raw", "upstream_smooth"):
@@ -161,7 +161,7 @@ def execute(args):
                         continue
                     pool = [{"query_id": r["query_id"], "doc_id": r["doc_id"], "prob_relevant": float(v)} for r, v in zip(rows, p)]
                     record(mapping+"_confidence", complete_budget(pool, [], 1-np.maximum(p, 1-p), budget, seed), (p >= .5).astype(int), external)
-                    human, predicted, error, acquired, state = run_diagnostic_review(pool, LabelOracle(labels, budget), budget, base, seed)
+                    human, predicted, error, acquired, state = run_safe_judge(pool, LabelOracle(labels, budget), budget, base, seed)
                     record(mapping+"_diagnostic", human, predicted, external, state, error)
                     logs.append(json.dumps({"cohort": cohort, "seed": seed, "budget": budget, "method": mapping+"_diagnostic", "acquisitions": acquired}))
             print(f"{cohort}: seed {seed} complete", flush=True)

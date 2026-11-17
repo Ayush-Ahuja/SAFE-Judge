@@ -18,7 +18,7 @@ from scripts.run_class_threshold_experiment import (
     EXTRACTED, OUTPUT as THRESHOLDS, RankingMetrics, baseline, evaluate, read_gzip, save_gzip)
 from src.baselines.active_learning import LabelOracle
 from src.calibration.class_aware_review import run_class_aware_review
-from src.calibration.diagnostic_review import ReviewConfig
+from src.calibration.safe_judge import SafeJudgeConfig
 from src.evaluation.review_metrics import PolicyEvaluator
 from src.utils.io import file_hash, pair_key, write_csv, write_json
 
@@ -31,7 +31,7 @@ def job(cohort, seed, settings, output):
     labels = {pair_key(r): int(r["true_binary"]) for r in rows}
     evaluator = PolicyEvaluator(rows)
     rankings = RankingMetrics(rows) if cohort == "dl2020_all" else None
-    cfg = ReviewConfig(**json.loads((ROOT / "configs/diagnostic_review_selected.json").read_text())["review_config"])
+    cfg = SafeJudgeConfig(**json.loads((ROOT / "configs/safe_judge.json").read_text())["review_config"])
     result_paths = []
     for fraction in settings["human_fractions"]:
         budget = int(Decimal(str(fraction))*len(rows))
@@ -67,8 +67,8 @@ def main():
     parser.add_argument("--workers", type=int, default=2)
     args = parser.parse_args()
     settings = json.loads(args.config.read_text())
-    sources = [Path(__file__), args.config, ROOT / "configs/diagnostic_review_selected.json",
-        ROOT / "src/calibration/class_aware_review.py", ROOT / "src/calibration/diagnostic_review.py",
+    sources = [Path(__file__), args.config, ROOT / "configs/safe_judge.json",
+        ROOT / "src/calibration/class_aware_review.py", ROOT / "src/calibration/safe_judge.py",
         ROOT / "scripts/run_class_threshold_experiment.py", ROOT / "scripts/compare_qwen_transfer.py",
         ROOT / "scripts/evaluate_proposal_metrics.py", ROOT / "src/evaluation/review_metrics.py",
         ROOT / "src/baselines/active_learning.py", ROOT / "src/utils/io.py"]

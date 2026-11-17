@@ -10,7 +10,7 @@ import random
 
 import numpy as np
 
-from src.calibration.diagnostic_review import DiagnosticModel, ReviewConfig
+from src.calibration.safe_judge import SafeJudgeModel, SafeJudgeConfig
 
 
 def acceptance_plan(raw, error, reviewed, automatic_count, floors, tie,
@@ -65,10 +65,10 @@ def acceptance_plan(raw, error, reviewed, automatic_count, floors, tie,
 def run_class_aware_review(pool, oracle, budget, config=None, seed=0,
                            minimum_class_coverage=.05, batch_size=32,
                            objective="worst_class"):
-    config = config or ReviewConfig(gate_local=False, repair_labels=False, explore_every=0)
+    config = config or SafeJudgeConfig(gate_local=False, repair_labels=False, explore_every=0)
     if config.repair_labels:
         raise ValueError("This experiment preserves raw classes; repairs must be disabled")
-    model = DiagnosticModel(pool, config)
+    model = SafeJudgeModel(pool, config)
     if (type(budget) is not int or not 0 <= budget <= len(pool)
             or oracle.budget != budget or oracle.queried
             or not 0 < minimum_class_coverage <= 1

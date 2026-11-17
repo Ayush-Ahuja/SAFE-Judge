@@ -8,12 +8,12 @@ unchanged so earlier experiment hashes remain reproducible.
 import random
 from dataclasses import asdict
 import numpy as np
-from src.calibration.diagnostic_review import DiagnosticModel, ReviewConfig
+from src.calibration.safe_judge import SafeJudgeModel, SafeJudgeConfig
 
 
 def run_precision_review(pool, oracle, budget, config=None, seed=0, epsilon=None):
-    config = config or ReviewConfig()
-    model = DiagnosticModel(pool, config)
+    config = config or SafeJudgeConfig()
+    model = SafeJudgeModel(pool, config)
     if epsilon is not None:
         if not np.isfinite(epsilon) or not 0 < epsilon < .5:
             raise ValueError("Require a finite epsilon in (0, .5)")

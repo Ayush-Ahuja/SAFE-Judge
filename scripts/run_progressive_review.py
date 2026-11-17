@@ -17,7 +17,7 @@ from scripts.run_diagnostic_confirmation import load_scored
 from scripts.run_error_predictor_ablation import aggregate, complete_budget
 from src.baselines.active_learning import LabelOracle
 from src.baselines.lara import LaraConfig, run_lara
-from src.calibration.diagnostic_review import DiagnosticModel, ReviewConfig, run_diagnostic_review
+from src.calibration.safe_judge import SafeJudgeModel, SafeJudgeConfig, run_safe_judge
 from src.calibration.progressive_review import progressive_review
 from src.evaluation.review_metrics import PolicyEvaluator
 from src.utils.io import atomic_text, file_hash, pair_key, write_csv, write_json
@@ -32,8 +32,8 @@ def make_snapshots(pool, labels, method, budgets, seed, selected):
     index = {pair_key(r): i for i, r in enumerate(pool)}
     snapshots = {}
     if method == "selected_local":
-        _, _, _, acquired, _ = run_diagnostic_review(pool, LabelOracle(labels, max(budgets)), max(budgets), selected, seed)
-        model = DiagnosticModel(pool, selected)
+        _, _, _, acquired, _ = run_safe_judge(pool, LabelOracle(labels, max(budgets)), max(budgets), selected, seed)
+        model = SafeJudgeModel(pool, selected)
         processed = 0
         for budget in sorted(budgets):
             for row in acquired[processed:budget]:
@@ -62,7 +62,7 @@ def make_snapshots(pool, labels, method, budgets, seed, selected):
 
 def execute(args):
     settings = json.loads(args.config.read_text())
-    selected = ReviewConfig(**json.loads((ROOT/"configs/diagnostic_review_selected.json").read_text())["review_config"])
+    selected = SafeJudgeConfig(**json.loads((ROOT/"configs/safe_judge.json").read_text())["review_config"])
     known, known_meta = load_datasets(ROOT)
     confirmation_path = ROOT/"results/experiments/diagnostic_confirmation_v1/experiment.json"
     confirmation_bytes = confirmation_path.read_bytes()
@@ -79,12 +79,12 @@ def execute(args):
     shutil.copyfile(args.config, args.output_dir/"configuration.json")
     (args.output_dir/"cohort_snapshot.json").write_bytes(confirmation_bytes)
     sources = [Path(__file__), ROOT/"src/calibration/progressive_review.py", ROOT/"src/calibration/audit_release.py",
-               ROOT/"src/calibration/diagnostic_review.py", ROOT/"scripts/experiment_inputs.py",
+               ROOT/"src/calibration/safe_judge.py", ROOT/"scripts/experiment_inputs.py",
                ROOT/"src/evaluation/review_metrics.py", ROOT/"scripts/run_diagnostic_confirmation.py",
                ROOT/"src/baselines/lara.py", ROOT/"src/baselines/active_learning.py"]
     metadata = {"status": "running", "settings": settings, "known_inputs": known_meta,
                 "cohort_sha256": file_hash(args.output_dir/"cohort_snapshot.json"),
-                "selected_config_sha256": file_hash(ROOT/"configs/diagnostic_review_selected.json"),
+                "selected_config_sha256": file_hash(ROOT/"configs/safe_judge.json"),
                 "source_sha256": {str(p.relative_to(ROOT)): file_hash(p) for p in sources},
                 "scope": "Adaptive stopping on a fixed labelled evaluation pool, fresh random quality checks at each look, delta split across all looks and classes",
                 "work_replay": "Each work snapshot is fitted only on its own requested labels; future work labels and QC outcomes are excluded from that snapshot. Costs count the union of all work and QC purchases up to stopping.",

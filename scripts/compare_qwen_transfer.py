@@ -24,7 +24,7 @@ from scripts.run_error_predictor_ablation import aggregate, complete_budget
 from scripts.transfer_colab_support import safe_extract
 from src.baselines.active_learning import LabelOracle
 from src.baselines.lara import LaraConfig, run_lara
-from src.calibration.diagnostic_review import ReviewConfig, run_diagnostic_review
+from src.calibration.safe_judge import SafeJudgeConfig, run_safe_judge
 from src.evaluation.metrics import classification_metrics
 from src.evaluation.review_metrics import PolicyEvaluator
 from src.utils.io import atomic_text, file_hash, pair_key, read_manifest, read_predictions, write_csv, write_json
@@ -149,8 +149,8 @@ def run_job(extracted_string, output_string, cohort, method, seed, policy_config
         predicted = (raw_p >= .5).astype(int)
         state = None
         if method == "selected_local":
-            human, predicted, _, purchases, state = run_diagnostic_review(
-                pool, oracle, budget, ReviewConfig(**policy_config), seed)
+            human, predicted, _, purchases, state = run_safe_judge(
+                pool, oracle, budget, SafeJudgeConfig(**policy_config), seed)
         elif method.startswith("lara_"):
             grouping = "topics" if method.startswith("lara_topics_") else 1
             preprocessing = "upstream_smooth" if method.endswith("upstream_smooth") else "raw"
@@ -240,10 +240,10 @@ def main():
     if args.validate_only:
         print("Input provenance, CSV/logits and SQLite snapshots passed.")
         return
-    config_path = ROOT / "configs/diagnostic_review_selected.json"
+    config_path = ROOT / "configs/safe_judge.json"
     selected = json.loads(config_path.read_text())
     sources = (Path(__file__), ROOT / "scripts/run_error_predictor_ablation.py", ROOT / "src/baselines/lara.py",
-               ROOT / "src/baselines/active_learning.py", ROOT / "src/calibration/diagnostic_review.py",
+               ROOT / "src/baselines/active_learning.py", ROOT / "src/calibration/safe_judge.py",
                ROOT / "src/evaluation/review_metrics.py", ROOT / "src/utils/io.py")
     identity = {"input_archive_sha256": validation["archive_sha256"], "first_seed": FIRST_SEED,
                 "repetitions": args.repetitions, "human_budget_fractions": FRACTIONS,

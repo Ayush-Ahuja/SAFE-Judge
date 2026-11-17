@@ -167,7 +167,7 @@ def plot_comparison(compact, output):
 
 def make_report(output, metadata, compact, differences, validation):
     lines = ["# Qwen transfer comparison with LARA", "", "14 November 2026.", "",
-        "This comparison uses the returned Colab Qwen3.5-4B probabilities. The frozen local policy is the existing development-selected `local_unguarded` variant in `configs/diagnostic_review_selected.json`. Each policy starts fresh at each budget. Ten seeds cover 6000–6009. All sentinel and calibration labels count toward the common budget. Existing human judgments simulate paid expert responses.", "",
+        "This comparison uses the returned Colab Qwen3.5-4B probabilities. The frozen local policy is the existing development-selected `local_unguarded` variant in `configs/safe_judge.json`. Each policy starts fresh at each budget. Ten seeds cover 6000–6009. All sentinel and calibration labels count toward the common budget. Existing human judgments simulate paid expert responses.", "",
         "The four LARA variants combine global or per-query acquisition with raw or upstream-normalized probabilities. The fixed primary comparator is global LARA with upstream normalization. The best-tested LARA column selects the lowest mean query-average automatic error among all four variants separately for each budget. This retrospective selection uses evaluation labels. All four variants remain in the saved tables.", "",
         "## Input checks and raw assessor results", "",
         "All 17,046 unique pairs passed manifest/source hash checks, complete-pair validation, answer-logit checks and CSV/SQLite consistency. These checks verify the returned artifacts and their recorded inference provenance.", "",

@@ -9,8 +9,8 @@
   "compact_artifact_bytes": 29909814,
   "package_driver_sha256": "f925320e2037611d07fc8be7d658add659e1cbac42cea203f89cf3b2d6862c9e",
   "evidence_zip": "dist/safe_judge_final_evidence.zip",
-  "evidence_zip_bytes": 123279576,
-  "evidence_zip_sha256": "1fbf02069df1bc7688c5d25cca2542ef72cfdd7e15c1a2d56f7609e107c6e752",
-  "evidence_zip_members": 3650,
+  "evidence_zip_bytes": 123290663,
+  "evidence_zip_sha256": "bdb797035fbc376db2eae422f6375490b1d95b3c70e1cd1d3a93e981739bd7e9",
+  "evidence_zip_members": 3657,
   "evidence_scope": "Current COVID, DL2020 and pilot exact inference inputs/receipts; final ledgers; curated in-scope historical tables; frozen inference sources; no model weights"
 }

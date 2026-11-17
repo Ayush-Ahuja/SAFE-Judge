@@ -12,7 +12,7 @@ from scripts.run_confidence_views import read_token_verdicts
 from scripts.run_diagnostic_confirmation import load_scored
 from scripts.run_error_predictor_ablation import aggregate
 from src.baselines.active_learning import LabelOracle
-from src.calibration.diagnostic_review import ReviewConfig
+from src.calibration.safe_judge import SafeJudgeConfig
 from src.calibration.precision_review import run_precision_review
 from src.evaluation.review_metrics import PolicyEvaluator
 from src.utils.io import file_hash, pair_key, write_csv, write_json
@@ -28,13 +28,13 @@ def execute(output):
     covid, _ = load_scored(ROOT/"data/research/trec_covid_5000.jsonl", ROOT/"results/experiments/trec_covid_minilm_v1")
     cohort = json.loads((ROOT/"results/experiments/diagnostic_confirmation_v1/experiment.json").read_text())
     views["biomedical_ce_locked"] = [r for r in covid if r["query_id"] in cohort["test_query_ids"]["biomedical_ce_locked"]]
-    cfg = ReviewConfig(**json.loads((ROOT/"configs/diagnostic_review_selected.json").read_text())["review_config"])
+    cfg = SafeJudgeConfig(**json.loads((ROOT/"configs/safe_judge.json").read_text())["review_config"])
     output.mkdir(parents=True, exist_ok=False)
     metadata = {"status": "running", "first_seed": 10000, "repetitions": 10,
                 "epsilons": [None, .01, .001, .000001], "human_fraction": .5,
                 "scope": "Exploratory numerical correction after token-confidence counterexample; no locked confirmation claim",
                 "inputs": provenance, "source_sha256": {str(p.relative_to(ROOT)): file_hash(p) for p in
-                    (Path(__file__), ROOT/"src/calibration/precision_review.py", ROOT/"src/calibration/diagnostic_review.py",
+                    (Path(__file__), ROOT/"src/calibration/precision_review.py", ROOT/"src/calibration/safe_judge.py",
                      ROOT/"scripts/run_confidence_views.py", ROOT/"scripts/run_diagnostic_confirmation.py")}}
     write_json(output/"experiment.json", metadata)
     records, queries = [], []

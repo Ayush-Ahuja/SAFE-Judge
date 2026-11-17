@@ -19,7 +19,7 @@ from scripts.run_diagnostic_confirmation import probability_diagnostics
 from scripts.run_error_predictor_ablation import aggregate, complete_budget
 from src.baselines.active_learning import LabelOracle
 from src.baselines.lara import LaraConfig, run_lara
-from src.calibration.diagnostic_review import ReviewConfig, run_diagnostic_review
+from src.calibration.safe_judge import SafeJudgeConfig, run_safe_judge
 from src.evaluation.review_metrics import PolicyEvaluator
 from src.utils.io import atomic_text, file_hash, pair_key, write_csv, write_json
 
@@ -63,7 +63,7 @@ def execute(args):
         if not path.exists() or file_hash(path) != source["sha256"]:
             raise ValueError("Missing/mismatched confidence source; use --download")
     base = load_datasets(ROOT)[0]["chatreport"]
-    config = ReviewConfig(**json.loads((ROOT/"configs/diagnostic_review_selected.json").read_text())["review_config"])
+    config = SafeJudgeConfig(**json.loads((ROOT/"configs/safe_judge.json").read_text())["review_config"])
     views, clipped = {}, {}
     for model in ("phi3", "llama"):
         with (root/f"small_llm_results/gc_{model}_2e.csv").open(encoding="utf-8-sig", newline="") as stream:
@@ -95,7 +95,7 @@ def execute(args):
                 "probability_semantics": "Verdict-conditioned confidence proxies. Token scores are chosen-token probabilities, not renormalized Yes/No probabilities. Four Phi-3 and two Llama scores below 0.5 are placed at the bottom without flipping verdicts.",
                 "scope": "Same-generation confidence ablation and second cached assessor, not stochastic self-consistency or independent domain replication",
                 "source_sha256": {str(p.relative_to(ROOT)): file_hash(p) for p in (Path(__file__),
-                    ROOT/"src/calibration/diagnostic_review.py", ROOT/"src/evaluation/review_metrics.py",
+                    ROOT/"src/calibration/safe_judge.py", ROOT/"src/evaluation/review_metrics.py",
                     ROOT/"scripts/experiment_inputs.py", ROOT/"src/baselines/lara.py")}}
     write_json(args.output_dir/"experiment.json", metadata)
     records, queries, calibration = [], [], []
@@ -115,7 +115,7 @@ def execute(args):
                     records.append({**ids, **metric})
                     queries.extend({**ids, **q} for q in qrows)
                 record("raw_confidence", complete_budget(pool, [], 1-np.maximum(p, 1-p), budget, seed), (p >= .5).astype(int))
-                human, predicted, _, _, _ = run_diagnostic_review(pool, LabelOracle(labels, budget), budget, config, seed)
+                human, predicted, _, _, _ = run_safe_judge(pool, LabelOracle(labels, budget), budget, config, seed)
                 record("selected_local", human, predicted)
                 for grouping, preprocessing in ((1, "raw"), ("topics", "upstream_smooth")):
                     predictions, _, _ = run_lara(pool, LabelOracle(labels, budget), budget, LaraConfig(preprocessing=preprocessing), seed, grouping)

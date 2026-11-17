@@ -21,9 +21,10 @@ the supplement summarizes additional experiments and limitations.
 | Inference efficiency | `inference_efficiency.csv` |
 | Relevance-boundary study | `dl2020_boundary_*.csv` |
 
-The frozen method is `selected_local` / `local_unguarded`, configured in
-`configs/diagnostic_review_selected.json`. Internal identifiers are preserved
-so saved results match; the paper calls the method SAFE-Judge.
+The implementation is `src/calibration/safe_judge.py`, with frozen settings in
+`configs/safe_judge.json`. Run it with `scripts/run_safe_judge.py --method safe_judge`.
+The runner maps this name to `selected_local` in saved result tables. Discovery
+tables use the original identifier `local_unguarded`.
 
 DL 2019 informed discovery. DL 2020 and reserved COVID use frozen policy settings,
 but all are previously inspected public benchmarks. Full-50-topic COVID overlaps

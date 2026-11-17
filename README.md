@@ -41,7 +41,7 @@ Python 3.12, from the repository root:
 python -m pip install -r requirements-final.txt
 python -m unittest discover -s tests -v
 python scripts/build_final_report.py
-python scripts/reproduce_final.py --dataset covid_reserved --method selected_local
+python scripts/run_safe_judge.py --dataset covid_reserved --method safe_judge
 ```
 
 These commands use saved probabilities and need no GPU or model download.
@@ -50,8 +50,8 @@ These commands use saved probabilities and need no GPU or model download.
 
 | Path | Purpose |
 |---|---|
-| `src/calibration/diagnostic_review.py` | SAFE-Judge |
-| `configs/diagnostic_review_selected.json` | Frozen method settings |
+| `src/calibration/safe_judge.py` | SAFE-Judge |
+| `configs/safe_judge.json` | Frozen method settings |
 | `src/baselines/` | Lexical, MiniLM and LARA baselines |
 | `src/evaluation/` | Label, query and retrieval metrics |
 | `scripts/`, `tests/` | Experiment runners, report generation and correctness checks |

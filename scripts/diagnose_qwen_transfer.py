@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from scripts.compare_qwen_transfer import COHORTS, FIRST_SEED, load_cohort
 from src.baselines.active_learning import LabelOracle
-from src.calibration.diagnostic_review import ReviewConfig, run_diagnostic_review
+from src.calibration.safe_judge import SafeJudgeConfig, run_safe_judge
 from src.evaluation.review_metrics import PolicyEvaluator
 from src.utils.io import atomic_text, file_hash, pair_key, write_csv, write_json
 
@@ -27,7 +27,7 @@ def component_ablation(cohort, method, seed, config_values):
     rows = load_cohort(EXTRACTED, cohort)
     pool = [{k: r[k] for k in ("query_id", "doc_id", "prob_relevant")} for r in rows]
     labels = {pair_key(r): int(r["true_binary"]) for r in rows}
-    config = ReviewConfig(**config_values)
+    config = SafeJudgeConfig(**config_values)
     if method == "shared_only":
         config = replace(config, global_only=True)
     elif method == "without_query_size_weight":
@@ -36,7 +36,7 @@ def component_ablation(cohort, method, seed, config_values):
         raise ValueError("Unsupported component ablation")
     budget = len(rows) // 2
     oracle = LabelOracle(labels, budget)
-    human, predicted, _, purchased, _ = run_diagnostic_review(pool, oracle, budget, config, seed)
+    human, predicted, _, purchased, _ = run_safe_judge(pool, oracle, budget, config, seed)
     if len(purchased) != len(set(oracle.queried)) or len(purchased) != budget:
         raise ValueError("Invalid ablation budget")
     metrics, _ = PolicyEvaluator(rows).evaluate(human, predicted)
@@ -48,7 +48,7 @@ def main():
     metadata = json.loads((COMPARISON / "experiment.json").read_text())
     if metadata["status"] != "complete":
         raise ValueError("Require completed main comparison")
-    config_path = ROOT / "configs/diagnostic_review_selected.json"
+    config_path = ROOT / "configs/safe_judge.json"
     config = json.loads(config_path.read_text())["review_config"]
     if config != metadata["identity"]["selected_policy"]["review_config"]:
         raise ValueError("Selected policy changed")
@@ -123,7 +123,7 @@ def main():
     write_json(OUTPUT / "experiment.json", {"status": "complete", "scope": "Post-hoc diagnosis at 50% human review. Two pre-existing configuration switches, no parameter search or replacement of main results.",
         "seeds": list(range(FIRST_SEED, FIRST_SEED+10)), "comparison_metadata_sha256": file_hash(COMPARISON / "experiment.json"),
         "selected_config_sha256": file_hash(config_path), "source_sha256": {p.relative_to(ROOT).as_posix(): file_hash(p) for p in
-            (Path(__file__), ROOT / "src/calibration/diagnostic_review.py", ROOT / "src/evaluation/review_metrics.py")},
+            (Path(__file__), ROOT / "src/calibration/safe_judge.py", ROOT / "src/evaluation/review_metrics.py")},
         "ablations": len(ablations), "allocation_decompositions": len(decomposition),
         "sentinel_scope": "Sentinel cost is measured. Sentinel removal is not evaluated in these ablations.",
         "interpretation": "Removing the local update and removing the query-size weight isolate components conditional on this implementation and these fixed pools."})

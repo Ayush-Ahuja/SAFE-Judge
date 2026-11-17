@@ -15,7 +15,7 @@ from scripts.oosterhuis_inputs import binary_top10, load_reference
 from scripts.run_error_predictor_ablation import complete_budget
 from src.baselines.active_learning import LabelOracle
 from src.baselines.lara import LaraConfig, run_lara
-from src.calibration.diagnostic_review import ReviewConfig, run_diagnostic_review
+from src.calibration.safe_judge import SafeJudgeConfig, run_safe_judge
 from src.evaluation.review_metrics import PolicyEvaluator
 from src.utils.io import atomic_text, file_hash, pair_key, write_csv, write_json
 
@@ -36,8 +36,8 @@ def reference_dataset(rows, dataset_class, observed=None):
 def execute(output):
     settings, cache, (datasets, methods, _) = load_reference()
     design = settings["matched_experiment"]
-    config_path = ROOT/"configs/diagnostic_review_selected.json"
-    review_config = ReviewConfig(**json.loads(config_path.read_text())["review_config"])
+    config_path = ROOT/"configs/safe_judge.json"
+    review_config = SafeJudgeConfig(**json.loads(config_path.read_text())["review_config"])
     output.mkdir(parents=True, exist_ok=False)
     metadata = {"status": "running", "settings": design, "reference_revision": settings["revision"],
                 "reference_file_sha256": {r["path"]: r["sha256"] for r in settings["files"]},
@@ -47,7 +47,7 @@ def execute(output):
                 "interval_mapping": "Estimate unseen-query mean using upstream method, then combine its bounds with the known human-query contribution to obtain a full-pool DCG interval. Interval coverage is empirical on this fixed pool; no transferred finite-pool guarantee asserted.",
                 "label_isolation": "Oosterhuis calibration queries are purchased through an oracle. Unseen-query dataset contains zero-label placeholders. Only the evaluator reads unseen gold.",
                 "source_sha256": {str(p.relative_to(ROOT)): file_hash(p) for p in (Path(__file__),
-                    ROOT/"scripts/oosterhuis_inputs.py", ROOT/"src/calibration/diagnostic_review.py",
+                    ROOT/"scripts/oosterhuis_inputs.py", ROOT/"src/calibration/safe_judge.py",
                     ROOT/"src/baselines/lara.py", ROOT/"src/evaluation/review_metrics.py")}, "datasets": {}}
     write_json(output/"experiment.json", metadata)
     records, queries, ledgers = [], [], []
@@ -95,7 +95,7 @@ def execute(output):
                 record_annotation("raw_confidence", complete_budget(pool, [], 1-np.maximum(probabilities, 1-probabilities), budget, seed), predicted)
                 record_annotation("random_query_labels", calibration_mask, predicted)
                 oracle = LabelOracle(labels, budget)
-                human, local_predicted, _, acquired, _ = run_diagnostic_review(pool, oracle, budget, review_config, seed)
+                human, local_predicted, _, acquired, _ = run_safe_judge(pool, oracle, budget, review_config, seed)
                 record_annotation("local_diagnosis", human, local_predicted)
                 ledgers.append(json.dumps({**ids, "method": "local_diagnosis", "purchases": acquired}))
                 index = {pair_key(r): i for i, r in enumerate(rows)}

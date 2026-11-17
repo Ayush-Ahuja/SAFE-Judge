@@ -19,7 +19,7 @@ from scripts.run_diagnostic_confirmation import fit_platt
 from scripts.run_error_predictor_ablation import complete_budget
 from src.baselines.active_learning import LabelOracle
 from src.baselines.lara import LaraConfig, run_lara
-from src.calibration.diagnostic_review import ReviewConfig, run_diagnostic_review
+from src.calibration.safe_judge import SafeJudgeConfig, run_safe_judge
 from src.evaluation.review_metrics import PolicyEvaluator
 from src.utils.io import atomic_text, file_hash, pair_key, write_csv, write_json
 
@@ -72,7 +72,7 @@ def run_policy(rows, probabilities, candidate, budget, seed):
     labels = {pair_key(r): int(r["true_binary"]) for r in rows}
     oracle = LabelOracle(labels, budget)
     if candidate["family"] == "ours":
-        human, predicted, _, acquired, _ = run_diagnostic_review(pool, oracle, budget, ReviewConfig(**candidate["config"]), seed)
+        human, predicted, _, acquired, _ = run_safe_judge(pool, oracle, budget, SafeJudgeConfig(**candidate["config"]), seed)
     elif candidate["family"] == "lara":
         result, acquired, _ = run_lara(pool, oracle, budget, LaraConfig(**candidate["config"]), seed, candidate["grouping"])
         human = np.asarray([r["label_source"] == "human" for r in result])
@@ -222,12 +222,12 @@ def evaluate_split_seed(split, choices, frozen, seed, settings):
 
 def main():
     settings = json.loads(CONFIG.read_text())
-    selected_path = ROOT / "configs/diagnostic_review_selected.json"
-    frozen_config = ReviewConfig(**json.loads(selected_path.read_text())["review_config"])
+    selected_path = ROOT / "configs/safe_judge.json"
+    frozen_config = SafeJudgeConfig(**json.loads(selected_path.read_text())["review_config"])
     frozen = {"family": "ours", "view": "raw", "grouping": None, "config": asdict(frozen_config)}
     design = {"settings": settings, "selected_policy": asdict(frozen_config), "config_sha256": file_hash(CONFIG),
               "source_sha256": {p.relative_to(ROOT).as_posix(): file_hash(p) for p in (Path(__file__),
-                  ROOT / "scripts/run_diagnostic_confirmation.py", ROOT / "src/calibration/diagnostic_review.py",
+                  ROOT / "scripts/run_diagnostic_confirmation.py", ROOT / "src/calibration/safe_judge.py",
                   ROOT / "src/baselines/lara.py", ROOT / "src/evaluation/review_metrics.py")},
               "input_predictions_sha256": {dataset: file_hash(EXTRACTED / f"runs/{dataset}/predictions.csv")
                                            for dataset in ("trec_covid", "chatreport")}}

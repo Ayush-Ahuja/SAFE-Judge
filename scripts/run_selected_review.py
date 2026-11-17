@@ -14,7 +14,7 @@ sys.path.insert(0, str(ROOT))
 from scripts.run_diagnostic_confirmation import load_scored
 from scripts.run_error_predictor_ablation import aggregate
 from src.baselines.active_learning import LabelOracle
-from src.calibration.diagnostic_review import ReviewConfig, run_diagnostic_review
+from src.calibration.safe_judge import SafeJudgeConfig, run_safe_judge
 from src.evaluation.review_metrics import PolicyEvaluator
 from src.utils.io import atomic_text, file_hash, pair_key, write_csv, write_json
 
@@ -33,11 +33,11 @@ def execute(args):
               "cohort_source_sha256": file_hash(confirmation),
               "test_query_ids": metadata["test_query_ids"],
               "source_sha256": {str(p.relative_to(ROOT)): file_hash(p) for p in (Path(__file__),
-                  ROOT/"src/calibration/diagnostic_review.py", ROOT/"scripts/run_diagnostic_confirmation.py",
+                  ROOT/"src/calibration/safe_judge.py", ROOT/"scripts/run_diagnostic_confirmation.py",
                   ROOT/"src/evaluation/review_metrics.py")},
               "scope": "Secondary hypothesis selected on known discovery data before inspecting biomedical policy outcomes; target reviews are paid adaptation"}
     write_json(args.output_dir/"experiment.json", report)
-    config = ReviewConfig(**settings["review_config"])
+    config = SafeJudgeConfig(**settings["review_config"])
     records, queries, logs = [], [], []
     start = time.perf_counter()
     for cohort, rows in cohorts.items():
@@ -48,7 +48,7 @@ def execute(args):
         for seed in range(settings["first_seed"], settings["first_seed"]+settings["repetitions"]):
             for fraction in settings["human_budget_fractions"]:
                 budget = int(len(pool)*fraction)
-                human, predicted, error, acquired, state = run_diagnostic_review(pool, LabelOracle(labels, budget), budget, config, seed)
+                human, predicted, error, acquired, state = run_safe_judge(pool, LabelOracle(labels, budget), budget, config, seed)
                 metrics, qrows = evaluator.evaluate(human, predicted)
                 ids = {"dataset": cohort, "seed": seed, "budget": budget, "method": "selected_local", "pilot_labels": 0}
                 records.append({**ids, **metrics, "total_human_labels": metrics["human_labels"],
@@ -69,6 +69,6 @@ def execute(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", type=Path, default=ROOT/"configs/diagnostic_review_selected.json")
+    parser.add_argument("--config", type=Path, default=ROOT/"configs/safe_judge.json")
     parser.add_argument("--output-dir", type=Path, required=True)
     execute(parser.parse_args())

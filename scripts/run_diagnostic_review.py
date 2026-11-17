@@ -16,7 +16,7 @@ from scripts.experiment_inputs import load_datasets
 from scripts.run_error_predictor_ablation import aggregate, complete_budget
 from src.baselines.active_learning import LabelOracle
 from src.baselines.lara import LaraConfig, run_lara
-from src.calibration.diagnostic_review import ReviewConfig, run_diagnostic_review
+from src.calibration.safe_judge import SafeJudgeConfig, run_safe_judge
 from src.evaluation.review_metrics import PolicyEvaluator
 from src.utils.io import atomic_text, file_hash, pair_key, write_csv, write_json
 
@@ -26,7 +26,7 @@ def execute(args):
     datasets, provenance = load_datasets(ROOT)
     args.output_dir.mkdir(parents=True, exist_ok=False)
     shutil.copyfile(args.config, args.output_dir/"configuration.json")
-    sources = [Path(__file__), ROOT/"src/calibration/diagnostic_review.py", ROOT/"scripts/experiment_inputs.py",
+    sources = [Path(__file__), ROOT/"src/calibration/safe_judge.py", ROOT/"scripts/experiment_inputs.py",
                ROOT/"src/evaluation/review_metrics.py", ROOT/"src/baselines/lara.py", ROOT/"src/baselines/active_learning.py"]
     metadata = {"status": "running", "settings": settings, "inputs": provenance,
                 "config_sha256": file_hash(args.config),
@@ -35,7 +35,7 @@ def execute(args):
                 "budget": "Every sentinel, exploratory review and exploitation review charged once"}
     write_json(args.output_dir/"experiment.json", metadata)
     shared = {k: settings[k] for k in ("shared_strength", "local_strength", "local_prior_probability", "repair_threshold")}
-    base = ReviewConfig(**shared)
+    base = SafeJudgeConfig(**shared)
     records, queries, logs = [], [], []
     start = time.perf_counter()
     for dataset, rows in datasets.items():
@@ -63,7 +63,7 @@ def execute(args):
                 for method, overrides in settings["variants"].items():
                     oracle = LabelOracle(labels, budget)
                     began = time.perf_counter()
-                    human, predicted, error, acquired, state = run_diagnostic_review(pool, oracle, budget, replace(base, **overrides), seed)
+                    human, predicted, error, acquired, state = run_safe_judge(pool, oracle, budget, replace(base, **overrides), seed)
                     record(method, human, predicted, error, state, time.perf_counter()-began)
                     logs.append(json.dumps({"dataset": dataset, "seed": seed, "budget": budget,
                                             "method": method, "acquisitions": acquired}))

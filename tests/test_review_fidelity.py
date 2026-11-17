@@ -11,8 +11,8 @@ import numpy as np
 from scripts.run_confidence_views import read_token_verdicts
 from src.baselines.active_learning import LabelOracle
 from src.calibration.audit_release import upper_error_total
-from src.calibration.diagnostic_review import ReviewConfig, run_diagnostic_review
-from src.calibration.diagnostic_utility import run_utility_review
+from src.calibration.safe_judge import SafeJudgeConfig, run_safe_judge
+from src.calibration.ranking_aware_review import run_utility_review
 from src.evaluation.retrieval_fidelity import RetrievalFidelity
 from src.utils.io import pair_key
 
@@ -22,7 +22,7 @@ class ReviewFidelityTests(unittest.TestCase):
         pool = [{"query_id": str(q), "doc_id": str(d), "prob_relevant": .9 if d % 2 else .2}
                 for q in range(3) for d in range(10)]
         labels = {pair_key(r): int(r["prob_relevant"] >= .5) for r in pool}
-        first = run_diagnostic_review(pool, LabelOracle(labels, 12), 12, seed=19)
+        first = run_safe_judge(pool, LabelOracle(labels, 12), 12, seed=19)
         second = run_utility_review(pool, LabelOracle(labels, 12), 12, seed=19)
         for i in (0, 1, 2):
             np.testing.assert_array_equal(first[i], second[i])

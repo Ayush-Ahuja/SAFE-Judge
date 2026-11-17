@@ -34,14 +34,14 @@
   "supplement_template": "Stage 2: 11pt A4 article, Times/Courier, 0.8in margins, compact headings, NavyBlue links and course/report header; also matches the proposal style.",
   "method_naming": "SAFE-Judge in full-method comparisons; query-local terminology retained for components and ablations; original configuration identifiers unchanged.",
   "supplement_summary_revision": "Experiment summary in simpler language with short definitions and readable table labels.",
-  "code_cleanup_tests": "128 offline tests passed after helper renames and archival; SAFE-Judge COVID and LARA DL2020 replays match published metrics.",
+  "code_cleanup_tests": "128 tests passed after SAFE-Judge renaming. New and legacy commands reproduce published metrics.",
   "best_means_bold": "Main paper and ten supplement tables highlight best comparable reported means.",
   "documentation_cleanup": {
     "docs_before": 12,
     "docs_after": 6,
     "markdown_files_checked": 10,
     "local_links_checked": 21,
-    "retained_markdown_words": 2110,
+    "retained_markdown_words": 2052,
     "scientific_code_changed": false,
     "pdf_content_changed": false
   },
@@ -84,5 +84,19 @@
     "values_and_row_order_match_previous_builder": true,
     "grouping": "Per dataset or calibration cost. Class-aware results compare the three complete 5%-floor variants. Oosterhuis score error is compared within each budget row.",
     "class_coverage_counts_and_costs_are_descriptive": true
+  },
+  "safe_judge_naming": {
+    "implementation": "src/calibration/safe_judge.py",
+    "configuration": "configs/safe_judge.json",
+    "runner": "scripts/run_safe_judge.py",
+    "method_option": "safe_judge",
+    "tests_passed": 128,
+    "published_metrics_match": [
+      "DL 2020",
+      "COVID reserved"
+    ],
+    "legacy_replay_matches_new_replay": true,
+    "historical_design_guard_verified": true,
+    "core_calculations_ast_equivalent": true
   }
 }

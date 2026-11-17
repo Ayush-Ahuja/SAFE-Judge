@@ -23,7 +23,7 @@ from scripts.run_diagnostic_confirmation import fit_platt
 from scripts.run_error_predictor_ablation import complete_budget
 from src.baselines.active_learning import LabelOracle
 from src.baselines.lara import LaraConfig, run_lara
-from src.calibration.diagnostic_review import ReviewConfig, run_diagnostic_review
+from src.calibration.safe_judge import SafeJudgeConfig, run_safe_judge
 from src.calibration.gaussian_grades import GradeDensityModel, relevance_probability, binary_error_probability
 from src.evaluation.metrics import classification_metrics
 from src.evaluation.review_metrics import PolicyEvaluator
@@ -150,8 +150,8 @@ def baseline_allocation(pool, labels, method, budget, seed):
     p = np.asarray([r["prob_relevant"] for r in pool])
     oracle = LabelOracle(labels, budget)
     if method == "selected_local":
-        cfg = ReviewConfig(**json.loads((ROOT / "configs/diagnostic_review_selected.json").read_text())["review_config"])
-        human, predicted, _, acquired, _ = run_diagnostic_review(pool, oracle, budget, cfg, seed)
+        cfg = SafeJudgeConfig(**json.loads((ROOT / "configs/safe_judge.json").read_text())["review_config"])
+        human, predicted, _, acquired, _ = run_safe_judge(pool, oracle, budget, cfg, seed)
     elif method.startswith("lara_"):
         grouping = "topics" if method.startswith("lara_topics_") else 1
         preprocessing = "upstream_smooth" if method.endswith("upstream_smooth") else "raw"
@@ -312,7 +312,7 @@ def main():
     studies = scenarios(settings)
     OUTPUT.mkdir(parents=True, exist_ok=True)
     design = {"settings": settings, "source_sha256": {p.relative_to(ROOT).as_posix(): file_hash(p) for p in
-              (Path(__file__), ROOT / "src/calibration/gaussian_grades.py", ROOT / "src/calibration/diagnostic_review.py",
+              (Path(__file__), ROOT / "src/calibration/gaussian_grades.py", ROOT / "src/calibration/safe_judge.py",
                ROOT / "src/baselines/lara.py", ROOT / "src/evaluation/review_metrics.py", ROOT / "scripts/run_diagnostic_confirmation.py")},
               "scenarios": [{k: v for k, v in s.items() if k not in ("calibration", "test")} | {
                   "calibration_pool_sha256": hashlib.sha256(json.dumps(s["calibration"], sort_keys=True).encode()).hexdigest(),

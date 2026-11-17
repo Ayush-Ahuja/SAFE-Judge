@@ -23,7 +23,7 @@ from scripts.run_class_threshold_experiment import sample_calibration
 from src.baselines.active_learning import LabelOracle
 from src.baselines.lara import LaraConfig, run_lara
 from src.calibration.class_thresholds import select_class_thresholds
-from src.calibration.diagnostic_review import ReviewConfig, run_diagnostic_review
+from src.calibration.safe_judge import SafeJudgeConfig, run_safe_judge
 from src.evaluation.metrics import classification_metrics
 from src.evaluation.review_metrics import PolicyEvaluator
 from src.utils.io import file_hash, pair_key, read_predictions, write_csv, write_json
@@ -31,7 +31,7 @@ from src.utils.io import file_hash, pair_key, read_predictions, write_csv, write
 COVID = ROOT / 'results/transfer/qwen35_covid_proposal_v1_dataset_full'
 OUT = ROOT / 'results/experiments/final_supplement_v1'
 SEEDS = list(range(6000, 6010))
-POLICY = ROOT / 'configs/diagnostic_review_selected.json'
+POLICY = ROOT / 'configs/safe_judge.json'
 
 
 def save(path, value):
@@ -60,7 +60,7 @@ def allocate(rows, budget, method, seed, config):
     oracle = LabelOracle({pair_key(r):int(r['true_binary']) for r in rows}, budget)
     start = time.perf_counter()
     if method == 'selected_local':
-        human, pred, _, bought, state = run_diagnostic_review(pool, oracle, budget, ReviewConfig(**config), seed)
+        human, pred, _, bought, state = run_safe_judge(pool, oracle, budget, SafeJudgeConfig(**config), seed)
     else:
         grouping = 'topics' if method.startswith('lara_topics') else 1
         prep = 'upstream_smooth' if method.endswith('upstream_smooth') else 'raw'
@@ -170,16 +170,36 @@ def common_baselines():
     return records
 
 
+def matches_saved_design(saved, current):
+    """Accept source renames recorded with verified original and current hashes."""
+    provenance=ROOT/'reports/final/code_cleanup_manifest.json'
+    actions=json.loads(provenance.read_text(encoding='utf-8'))['actions'] if provenance.exists() else []
+    aliases={action['destination']:action for action in actions
+             if action['action']=='rename' and 'renamed_sha256' in action}
+    sources={}
+    for name,digest in current['source_sha256'].items():
+        alias=aliases.get(name)
+        if (alias and digest==alias['renamed_sha256']
+                and saved['source_sha256'].get(alias['source'])==alias['original_sha256']):
+            sources[alias['source']]=alias['original_sha256']
+        else:
+            sources[name]=digest
+    return saved==dict(current,source_sha256=sources)
+
+
 def main():
     OUT.mkdir(parents=True,exist_ok=True)
-    sources=[POLICY,ROOT/'src/calibration/class_thresholds.py',ROOT/'src/calibration/diagnostic_review.py',ROOT/'src/baselines/lara.py']
+    sources=[POLICY,ROOT/'src/calibration/class_thresholds.py',ROOT/'src/calibration/safe_judge.py',ROOT/'src/baselines/lara.py']
     design=dict(source_sha256={p.relative_to(ROOT).as_posix():file_hash(p) for p in sources},
         inputs={str(p.relative_to(ROOT)):file_hash(p) for p in (COVID/'runs/trec_covid/predictions.csv',COVID/'inputs/trec_covid.metadata.json')},
         target_calibration='1000 or 200 labels on the same ten development topics; full-pool total budget 2500; fixed C=1 Platt, no hyperparameter search',
         thresholds='20 seeds, 100/200/500 calibration labels, 25/50/75 percent total cost on 4000 reserved pairs; fixed settings inherited from class_threshold_experiment.json')
     path=OUT/'design.json'
-    if path.exists() and json.loads(path.read_text()) != design:raise ValueError('Frozen final-supplement design changed')
-    write_json(path,design)
+    if path.exists():
+        if not matches_saved_design(json.loads(path.read_text()),design):
+            raise ValueError('Frozen final-supplement design changed')
+    else:
+        write_json(path,design)
     records=thresholds();print('Threshold rows',len(records),flush=True)
     with ProcessPoolExecutor(max_workers=2) as ex:
         jobs=[ex.submit(calibration_job,c,s,m,v) for c in (200,1000) for s in SEEDS for m in ('selected_local','lara_1_raw') for v in ('raw','platt')]
@@ -188,7 +208,7 @@ def main():
             print('Calibration',r['calibration_labels'],r['seed'],r['method'],r['score_view'],flush=True)
     records+=common_baselines()
     write_csv(OUT/'runs.csv',records, list(dict.fromkeys(k for r in records for k in r)))
-    write_json(OUT/'experiment.json',dict(status='complete',rows=len(records),design_sha256=file_hash(path),driver_sha256=file_hash(Path(__file__)),unique_ledgers_checked=True,scope='Exploratory CPU evaluation on previously inspected benchmarks; gold oracle, no new inference.'))
+    write_json(OUT/'experiment.json',dict(status='complete',rows=len(records),design_sha256=file_hash(path),driver_sha256=file_hash(Path(__file__)),current_source_sha256=design['source_sha256'],unique_ledgers_checked=True,scope='Exploratory CPU evaluation on previously inspected benchmarks; gold oracle, no new inference.'))
     print('Final supplement complete',len(records),flush=True)
 
 

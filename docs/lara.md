@@ -18,8 +18,8 @@ offline fixtures are in `tests/fixtures/lara_reference.json`.
 The final replay runs directly on released scores:
 
 ```powershell
-python scripts/reproduce_final.py --dataset dl2020 --method lara_1_raw
-python scripts/reproduce_final.py --dataset dl2020 --method lara_topics_upstream_smooth
+python scripts/run_safe_judge.py --dataset dl2020 --method lara_1_raw
+python scripts/run_safe_judge.py --dataset dl2020 --method lara_topics_upstream_smooth
 ```
 
 For raw manifests, use `scripts/run_lara_baseline.py --help`. Optional upstream

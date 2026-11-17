@@ -85,8 +85,54 @@
       "destination": "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge-local-archive\\2026-11-17-final-submission\\publication_code_cleanup\\archived\\scripts\\prepare_final_evidence.py",
       "reason": "One-time curation from historical paths; final replay uses released canonical artifacts.",
       "sha256": "0c2acc37b25c8b0e4df4be7df1c4ead2d56a86725c2cf9a0e8f87885d6fc8653"
+    },
+    {
+      "action": "rename",
+      "source": "src/calibration/diagnostic_review.py",
+      "destination": "src/calibration/safe_judge.py",
+      "original_sha256": "280747c5160eba165d7e2ea6f5bd87f5ea43c547f3942fdbe223a3de076e4e97",
+      "renamed_sha256": "56ee66c17a3b65c0e8b3198124699b293bc056f8d792bdfb60aafea247047f8c"
+    },
+    {
+      "action": "rename",
+      "source": "configs/diagnostic_review_selected.json",
+      "destination": "configs/safe_judge.json",
+      "original_sha256": "46934f86fcdda177c3dc7fcc673c97554a30edd2781a2bbb1b2fb510b796a425",
+      "renamed_sha256": "46934f86fcdda177c3dc7fcc673c97554a30edd2781a2bbb1b2fb510b796a425"
+    },
+    {
+      "action": "rename",
+      "source": "scripts/reproduce_final.py",
+      "destination": "scripts/run_safe_judge.py",
+      "original_sha256": "808076768d491a6b451e5eda22ad6812ad665f457e6053a1c6928b634762e1b6",
+      "renamed_sha256": "79f13652850294cac72e76b8e778438da1347cdbcd65254a8ea5e93de2e65b99"
+    },
+    {
+      "action": "rename",
+      "source": "tests/test_diagnostic_review.py",
+      "destination": "tests/test_safe_judge.py",
+      "original_sha256": "03b41aaf40e5a3acafd91022fea8ae97b4aa07f7b9c3e380ee471f4a50085d92",
+      "renamed_sha256": "35f91a94dafcad7bea8a1f0de93812f8cff444f33f763ab88eddbb9757613910"
+    },
+    {
+      "action": "rename",
+      "source": "src/calibration/diagnostic_utility.py",
+      "destination": "src/calibration/ranking_aware_review.py",
+      "original_sha256": "a88e9f27355bd8bf5bd96e56ea63479d1b87b09050cc7ce972584d0a9d5257d3",
+      "renamed_sha256": "e501bdbbd623d0a34654f74124f13d2b4b9936a9687e9dece1926cea51baaa0b"
     }
   ],
   "git_index_changed": false,
-  "scientific_note": "Algorithm bodies and numeric artifacts unchanged. Historical receipts retain their original paths and hashes; renamed source copies are archived."
+  "scientific_note": "Algorithm bodies and numeric artifacts unchanged. Historical receipts retain their original paths and hashes; renamed source copies are archived.",
+  "safe_judge_naming": {
+    "configuration_bytes_preserved": true,
+    "symbols": {
+      "ReviewConfig": "SafeJudgeConfig",
+      "DiagnosticModel": "SafeJudgeModel",
+      "run_diagnostic_review": "run_safe_judge"
+    },
+    "preferred_command": "python scripts/run_safe_judge.py --dataset dl2020 --method safe_judge",
+    "historical_method_id": "selected_local",
+    "core_ast_equivalent_except_names_and_messages": true
+  }
 }

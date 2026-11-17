@@ -8,7 +8,7 @@ import numpy as np
 
 from src.baselines.active_learning import LabelOracle
 from src.calibration.class_aware_review import acceptance_plan, run_class_aware_review
-from src.calibration.diagnostic_review import ReviewConfig
+from src.calibration.safe_judge import SafeJudgeConfig
 from src.utils.io import pair_key
 
 
@@ -79,7 +79,7 @@ class ClassAwareReviewTests(unittest.TestCase):
         self.assertFalse(oracle.queried)
         with self.assertRaises(ValueError):
             run_class_aware_review(self.pool, LabelOracle(self.labels, 10), 10,
-                replace(ReviewConfig(), repair_labels=True))
+                replace(SafeJudgeConfig(), repair_labels=True))
 
 
 if __name__ == "__main__":

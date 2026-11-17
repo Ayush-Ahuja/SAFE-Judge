@@ -1,19 +1,17 @@
-"""Explicit utility-weight extension of the frozen diagnostic review policy.
+"""Ranking-aware review using the SAFE-Judge update and purchase loop.
 
-The action loop preserves the original sentinel, purchase and update semantics;
-only the label-free acquisition weight may be replaced. Original source remains
-unchanged so earlier experiment hashes remain reproducible.
+The optional utility scores determine which unreviewed pairs receive priority.
 """
 
 import random
 from dataclasses import asdict
 import numpy as np
-from src.calibration.diagnostic_review import DiagnosticModel, ReviewConfig
+from src.calibration.safe_judge import SafeJudgeModel, SafeJudgeConfig
 
 
 def run_utility_review(pool, oracle, budget, config=None, seed=0, utility=None):
-    config = config or ReviewConfig()
-    model = DiagnosticModel(pool, config)
+    config = config or SafeJudgeConfig()
+    model = SafeJudgeModel(pool, config)
     if utility is not None:
         utility = np.asarray(utility, dtype=float)
         if utility.shape != (len(pool),) or not np.isfinite(utility).all() or np.any(utility < 0) or not utility.any():

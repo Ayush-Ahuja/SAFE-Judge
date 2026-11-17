@@ -17,8 +17,8 @@ from scripts.experiment_inputs import load_datasets
 from scripts.run_error_predictor_ablation import aggregate, complete_budget
 from src.baselines.active_learning import LabelOracle
 from src.baselines.lara import LaraConfig, run_lara
-from src.calibration.diagnostic_review import ReviewConfig
-from src.calibration.diagnostic_utility import run_utility_review
+from src.calibration.safe_judge import SafeJudgeConfig
+from src.calibration.ranking_aware_review import run_utility_review
 from src.evaluation.review_metrics import PolicyEvaluator
 from src.evaluation.retrieval_fidelity import RetrievalFidelity
 from src.utils.io import atomic_text, file_hash, pair_key, write_csv, write_json
@@ -26,8 +26,8 @@ from src.utils.io import atomic_text, file_hash, pair_key, write_csv, write_json
 
 def execute(args):
     settings = json.loads(args.config.read_text())
-    selected_path = ROOT/"configs/diagnostic_review_selected.json"
-    config = ReviewConfig(**json.loads(selected_path.read_text())["review_config"])
+    selected_path = ROOT/"configs/safe_judge.json"
+    config = SafeJudgeConfig(**json.loads(selected_path.read_text())["review_config"])
     datasets, provenance = load_datasets(ROOT)
     rows = sorted(datasets["dl2019"], key=pair_key)
     pool = [{k: r[k] for k in ("query_id", "doc_id", "prob_relevant")} for r in rows]
@@ -43,7 +43,7 @@ def execute(args):
     impact = impact*query_weights.sum()/impact.sum()
     args.output_dir.mkdir(parents=True, exist_ok=False)
     shutil.copyfile(args.config, args.output_dir/"configuration.json")
-    sources = [Path(__file__), ROOT/"src/calibration/diagnostic_utility.py", ROOT/"src/calibration/diagnostic_review.py",
+    sources = [Path(__file__), ROOT/"src/calibration/ranking_aware_review.py", ROOT/"src/calibration/safe_judge.py",
                ROOT/"src/evaluation/retrieval_fidelity.py", ROOT/"src/evaluation/review_metrics.py",
                ROOT/"scripts/experiment_inputs.py", ROOT/"src/baselines/lara.py"]
     metadata = {"status": "running", "settings": settings, "inputs": provenance["dl2019"],

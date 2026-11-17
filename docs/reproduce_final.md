@@ -10,13 +10,13 @@ python -m pip install -r requirements-final.txt
 python -m unittest discover -s tests -v
 python scripts/build_final_report.py
 python scripts/verify_final_artifacts.py
-python scripts/reproduce_final.py --dataset dl2020 --method selected_local --seed 6000
-python scripts/reproduce_final.py --dataset dl2020 --method lara_1_raw --seed 6000
-python scripts/reproduce_final.py --dataset covid_reserved --method selected_local --seed 6000
+python scripts/run_safe_judge.py --dataset dl2020 --method safe_judge --seed 6000
+python scripts/run_safe_judge.py --dataset dl2020 --method lara_1_raw --seed 6000
+python scripts/run_safe_judge.py --dataset covid_reserved --method safe_judge --seed 6000
 ```
 
 Datasets: `dl2019`, `dl2020`, `covid_reserved`, `covid_all`.
-Methods: `selected_local` (SAFE-Judge), `lara_1_raw`, `lara_1_upstream_smooth`,
+Methods: `safe_judge` (SAFE-Judge), `lara_1_raw`, `lara_1_upstream_smooth`,
 `lara_topics_raw`, `lara_topics_upstream_smooth`, `raw_confidence`, `random_review`.
 Use `--human-fraction` for the budget (default `0.5`). Published DL 2020/COVID
 allocations use seeds 6000-6009 and fractions 0.1, 0.25, 0.5, 0.75 and 0.9.

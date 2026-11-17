@@ -13,7 +13,7 @@ sys.path.insert(0, str(ROOT))
 from scripts.compare_qwen_transfer import load_cohort
 from scripts.run_progressive_review import make_snapshots
 from src.baselines.active_learning import LabelOracle
-from src.calibration.diagnostic_review import ReviewConfig
+from src.calibration.safe_judge import SafeJudgeConfig
 from src.calibration.progressive_review import progressive_review
 from src.evaluation.review_metrics import PolicyEvaluator
 from src.utils.io import atomic_text, file_hash, pair_key, write_csv, write_json
@@ -34,7 +34,7 @@ def evaluate_job(cohort, method, seed, selected):
     pool = [{k: r[k] for k in ("query_id", "doc_id", "prob_relevant")} for r in rows]
     labels = {pair_key(r): int(r["true_binary"]) for r in rows}
     budgets = [int(fraction*len(rows)) for fraction in CHECKPOINTS]
-    snapshots = make_snapshots(pool, labels, method, budgets, seed, ReviewConfig(**selected))
+    snapshots = make_snapshots(pool, labels, method, budgets, seed, SafeJudgeConfig(**selected))
     def work(local, budget):
         human, predicted, keys = snapshots[budget]
         for key in keys:
@@ -65,13 +65,13 @@ def evaluate_job(cohort, method, seed, selected):
 
 
 def main():
-    selected = json.loads((ROOT / "configs/diagnostic_review_selected.json").read_text())["review_config"]
+    selected = json.loads((ROOT / "configs/safe_judge.json").read_text())["review_config"]
     identity = {"cohorts": COHORTS, "methods": METHODS, "seeds": list(range(6000, 6010)),
                 "checkpoints": CHECKPOINTS, "audit_fraction": .05, "alpha": .05, "class_risk": .20,
                 "delta": .05, "minimum_class_coverage": .05, "selected": selected,
                 "source_sha256": {p.relative_to(ROOT).as_posix(): file_hash(p) for p in
                     (Path(__file__), ROOT / "scripts/run_progressive_review.py", ROOT / "src/calibration/progressive_review.py",
-                     ROOT / "src/calibration/audit_release.py", ROOT / "src/calibration/diagnostic_review.py")}}
+                     ROOT / "src/calibration/audit_release.py", ROOT / "src/calibration/safe_judge.py")}}
     identity = json.loads(json.dumps(identity))
     OUTPUT.mkdir(parents=True, exist_ok=True)
     path = OUTPUT / "design.json"
