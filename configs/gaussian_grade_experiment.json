@@ -1,0 +1,23 @@
+{
+  "seeds": [6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009],
+  "labels_per_calibration_query": 20,
+  "dl2019_source_query_seed": 20261116,
+  "source_calibration_queries": 10,
+  "covid_split": "Existing 10 development and 40 evaluation queries",
+  "chatreport_split_seeds": [20261114, 20261115, 20261116],
+  "chatreport_development_queries": 3,
+  "flan_calibration_queries": 10,
+  "flan_query_split_seed": 20261116,
+  "covariance_shrinkage": 0.25,
+  "prior_pseudocount": 0.5,
+  "gaussian_variance_ridge": 0.0001,
+  "grade_model_families": ["lda", "qda", "gmm2", "logistic"],
+  "binary_gaussian_controls": ["lda", "qda"],
+  "review_fractions": [0.25, 0.5, 0.75],
+  "accounting": ["matched_review", "matched_total"],
+  "primary_model": "grade_qda_margin",
+  "primary_review_mode": "risk_only",
+  "fit_scope": "Only sampled calibration grades from disjoint queries enter fitted parameters. No model selection on evaluation outcomes.",
+  "grade_label_cost": "One purchased judgment returns its original relevance grade. Binary baselines receive its binary mapping. Additional time needed for graded annotation is not modeled.",
+  "scope": "Exploratory generative modeling on already inspected benchmarks. Qwen supplies binary scores with graded gold labels. Released Flan-UL2 supplies genuine graded probability vectors. No new LLM inference."
+}

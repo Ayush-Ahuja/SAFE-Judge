@@ -1,0 +1,13 @@
+{
+  "first_seed": 6000,
+  "repetitions": 10,
+  "checkpoints": [0.10, 0.25, 0.40, 0.50],
+  "audit_fraction": 0.05,
+  "alpha": 0.05,
+  "class_risk": 0.20,
+  "delta": 0.05,
+  "minimum_class_coverage": 0.05,
+  "methods": ["raw_confidence", "selected_local", "lara_1_raw", "lara_topics_upstream_smooth"],
+  "feasibility_gate": [true, false],
+  "cohorts": ["dl2019_qwen", "chatreport_phi3", "web_ce_heldout", "biomedical_ce_locked", "biomedical_target_platt"]
+}

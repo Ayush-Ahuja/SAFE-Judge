@@ -1,0 +1,4 @@
+comparator,low,high,draws,scope
+lara_1_raw,-0.013562244301578144,0.019988310929281106,2000,"Conditional paired topic bootstrap; recompute system means and tau per seed, then average; no reacquisition"
+lara_1_upstream_smooth,0.005961426066627964,0.057986557568673255,2000,"Conditional paired topic bootstrap; recompute system means and tau per seed, then average; no reacquisition"
+raw_confidence,0.009701928696668635,0.07247808299240227,2000,"Conditional paired topic bootstrap; recompute system means and tau per seed, then average; no reacquisition"

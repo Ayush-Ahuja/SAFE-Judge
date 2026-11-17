@@ -1,177 +1,67 @@
 # SAFE-Judge
 
-**Calibrated and Selective LLM Relevance Assessment under Domain Shift**
+**Shared Adaptive Feedback for Escalation in Relevance Assessment**
 
-This repository contains the completed Stage 2 pilot:
-frozen Qwen3.5-4B relevance assessment on **all 9,260 judged TREC DL 2019 pairs
-across 43 queries**. The model uses NF4 4-bit weights, FP16 computation, a 512-token
-input limit and the canonical Yes/No answer probabilities. Grades 2 and 3 count
-as relevant. No inputs were truncated in the completed run.
+Ayush Ahuja | COL764, IIT Delhi | November 2026
+
+SAFE-Judge allocates human review around a frozen Qwen3.5-4B relevance assessor.
+It combines shared and query-specific error estimates to choose the next pair
+for review. Purchased judgments replace model labels; other labels stay unchanged.
+
+## Paper and reproduction
+
+- [Paper](reports/final/paper.pdf) and [LaTeX](reports/final/paper.tex)
+- [Experiment summary](reports/final/supplement.pdf) and [combined report](reports/stage3_report.pdf)
+- [Reproduction commands](docs/reproduce_final.md)
+- [Experiment index](docs/experiment_index.md) and [baseline setup](docs/baselines.md)
+- [Results and data files](artifacts/README.md)
+- [AI usage](reports/ai_usage_statement.md), [data notice](DATA_NOTICE.md) and [citation](CITATION.cff)
 
 ## Results
 
-| Measurement | Completed pilot |
-| --- | ---: |
-| Accuracy | 79.40% |
-| Macro-F1 | 0.7368 |
-| Brier score | 0.1485 |
-| ECE, 10 equal-width probability bins | 0.0688 |
-| Main scoring time | 33.12 minutes |
-| GPU | Tesla T4 |
-| Manually reviewed failures | 50 |
+At 50% human review, including calibration and sentinel purchases:
 
-The [report](reports/stage2_report.pdf) presents confidence sweeps, query-bootstrap
-intervals, query-disjoint temperature scaling, numerical consistency, efficiency
-and the manual error analysis. Raw predictions, logits, splits and execution logs
-are retained in the [completed run](results/stage2/dl2019_qwen35_full_v1/).
+| Pool | SAFE-Judge query-average error | LARA global/raw | SAFE-Judge selective error |
+|---|---:|---:|---:|
+| DL 2019, discovery | 2.128% | 4.452% | See supplement |
+| DL 2020 | 0.539% | 1.086% | 1.333% |
+| COVID, 40 reserved topics | 4.458% | 5.250% | 8.915% |
 
-These are frozen-model pilot results. Teacher generation, adapter training, conformal
-risk control, domain-shift validation and retrieval-system ranking experiments are
-planned work, described in the report. The pilot does not establish a conformal guarantee.
+Query-average error divides each query's automatic mistakes by all its pairs;
+selective error divides mistakes by automatic pairs. The conditional comparison
+with LARA favors SAFE-Judge on DL 2020; its interval includes zero on reserved
+COVID topics. DL 2020 retains only 0.30% of original positives automatically.
+LARA has lower binary retrieval-score MAE despite similar system ordering.
 
-## Classical lexical baseline
+## Quick start
 
-The classical lexical baseline uses CPU logistic regression on BM25,
-query-term overlap and document length, with budgeted uncertainty sampling and
-mixed human/automatic labels. It includes
-shared query splits, exact seed-inclusive human budgets, acquisition logs,
-binary qrels and optional system-ranking evaluation. The
-[baseline guide](docs/lexical_active_learning.md) documents installation, provenance,
-protocol and experiment commands. The
-[validation record](docs/lexical_baseline_validation.md) describes completed checks.
+Python 3.12, from the repository root:
 
-## Calibrated neural cross-encoder
-
-The neural baseline uses a pinned MS MARCO MiniLM cross-encoder with positive
-temperature scaling on disjoint calibration queries and confidence-based human
-escalation. Raw model scores are cached once; evaluation supports shared splits,
-source/target collections, calibration-inclusive human budgets and the same binary
-qrels and ranking metrics as the lexical baseline. The
-[method and execution guide](docs/cross_encoder.md) describes the protocol, and the
-[validation record](docs/cross_encoder_validation.md) documents measured checks.
-
-## LARA
-
-The binary LARA baseline combines cached LLM probabilities with online calibration
-and budgeted human judgments. Global, three-group and per-topic variants use the
-pinned authors' binary implementation semantics, with reference parity checks,
-exact annotation budgets and the same binary evaluation outputs as the other
-baselines. The [method guide](docs/lara.md) and [validation record](docs/lara_validation.md)
-describe the implementation, measured Qwen/DL2019 adaptation and reproduction scope.
-
-## Repository layout
-
-| Path | Contents |
-| --- | --- |
-| `notebooks/stage2_colab.ipynb` | Full Colab workflow, progress display and Drive snapshots |
-| `configs/default.yaml` | Stage 2 settings pinned to the recorded model revision |
-| `src/` | Prompting, model scoring, evaluation metrics and checkpoint/data utilities |
-| `scripts/` | Data preparation, inference, evaluation, review export and report building |
-| `data/pilot/` | Frozen DL2019 manifest and sampling metadata |
-| `results/stage2/dl2019_qwen35_full_v1/` | Completed run, analyses and execution provenance |
-| `reports/` | Stage 1 proposal, Stage 2 report/source, completed reviews and separate figures |
-| `docs/` | Colab reproduction instructions and manual-review protocol |
-| `tests/` | Offline correctness, interruption/resume and notebook persistence tests |
-| `dist/` | Generated ZIPs and LaTeX builds; excluded from Git |
-
-## Continuous integration
-
-The [CI workflow](.github/workflows/ci.yml) runs on pushes, pull requests and manual
-dispatches in GitHub Actions. It checks Python 3.12 on GitHub-hosted Ubuntu and
-Windows machines, installs the CPU test/plot dependencies, validates the frozen
-DL2019 manifest, runs all offline tests and checks plotting and cross-encoder CLI
-imports. Dependency
-downloads are cached. The checks require no GPU, model weights, API keys or new
-datasets. Full inference and experiment sweeps are independent of CI.
-
-## CPU validation
-
-Manifest validation needs only Python. The full test suite covers both baselines
-using the lightweight CPU dependencies; cross-encoder scoring is tested with a
-synthetic backend. The following commands perform local
-validation from the repository root:
-
-```bash
-python scripts/run_pilot.py --manifest data/pilot/dl2019.jsonl --validate-only
-python -m pip install -r requirements-lexical.txt
+```powershell
+python -m pip install -r requirements-final.txt
 python -m unittest discover -s tests -v
+python scripts/build_final_report.py
+python scripts/reproduce_final.py --dataset covid_reserved --method selected_local
 ```
 
-Frozen experiment files and scoring code have recorded SHA256 checksums.
-The WSL/Linux verification command is:
+These commands use saved probabilities and need no GPU or model download.
 
-```bash
-sha256sum --check results/stage2/dl2019_qwen35_full_v1/checksums.sha256
-```
+## Code
 
-Evaluation can be regenerated in a separate directory while preserving the
-published run:
+| Path | Purpose |
+|---|---|
+| `src/calibration/diagnostic_review.py` | SAFE-Judge |
+| `configs/diagnostic_review_selected.json` | Frozen method settings |
+| `src/baselines/` | Lexical, MiniLM and LARA baselines |
+| `src/evaluation/` | Label, query and retrieval metrics |
+| `scripts/`, `tests/` | Experiment runners, report generation and correctness checks |
+| `artifacts/final/`, `reports/final/` | Numerical evidence and paper sources |
+| `notebooks/` | GPU workflows |
 
-```bash
-python scripts/evaluate_pilot.py \
-  --manifest data/pilot/dl2019.jsonl \
-  --predictions results/stage2/dl2019_qwen35_full_v1/predictions.csv \
-  --output-dir dist/evaluation \
-  --bootstrap-samples 10000 --calibration-queries 10 --seed 42
-```
+DL relevance is grade >=2; COVID relevance is grade >=1. COVID uses 100 judged
+pairs per topic and a fixed 10-development/40-evaluation split. Human review is
+simulated with existing judgments.
 
-Calibration uses 10 queries and tests on the other 33. This is a temperature-scaling
-experiment, not query-level conformal calibration.
-
-## Report generation
-
-Only the plotting dependency is needed for this CPU step; PyTorch and model downloads
-are unnecessary:
-
-```bash
-python -m pip install matplotlib==3.10.1
-python scripts/build_stage2_report.py
-mkdir -p dist/report-build
-cd reports
-pdflatex -interaction=nonstopmode -halt-on-error -output-directory=../dist/report-build stage2_report.tex
-pdflatex -interaction=nonstopmode -halt-on-error -output-directory=../dist/report-build stage2_report.tex
-cp ../dist/report-build/stage2_report.pdf stage2_report.pdf
-```
-
-The builder validates the manifest, prediction hash, metrics and completed reviews
-before generating `reports/stage2_results.tex` and nine separate PDF/PNG figures in
-`reports/figures/stage2/`. The narrative remains in `reports/stage2_report.tex`.
-The `--run-dir results/stage2/dl2019_qwen35_full_v1` option explicitly selects the
-published run when other run directories are present.
-
-## Inference reproduction
-
-The [Colab guide](docs/colab.md) describes the inference environment and execution
-protocol. The upload package is generated by:
-
-```bash
-python scripts/package_pilot.py
-```
-
-The upload package includes the frozen manifest, avoiding a new corpus download.
-The notebook installs the inference packages, runs the offline tests, validates the
-full judged pool, scores it, evaluates saved predictions and exports the run.
-Each experiment uses a distinct `RUN` name. The notebook provides resumable
-checkpoints and periodic Drive backups. Failure review is performed manually.
-
-Other GPU environments require a compatible CUDA PyTorch build and the dependencies
-in `requirements-pilot.txt`; the command-line scripts are shared across environments.
-The actual Colab versions and configuration are recorded with the completed run; HPC execution is
-not claimed as part of this pilot.
-
-## Data and manual review
-
-The frozen manifest contains benchmark queries, MS MARCO passage texts and official
-TREC DL 2019 grades, obtained through
-[`ir_datasets`](https://ir-datasets.com/msmarco-passage.html#msmarco-passage/trec-dl-2019/judged).
-It is a judged pool, not the complete MS MARCO corpus or a retrieval index.
-
-[Completed reviews](reports/failure_review.csv) contain the 50 manually reviewed
-errors; [sampling metadata](reports/failure_review.metadata.json) ties them to the
-manifest and predictions. The original unfilled export is preserved with the run.
-Official evaluation labels were retained, including cases marked as judgment disagreement.
-The [review protocol](docs/failure_review.md) and [AI-use statement](reports/ai_usage_statement.md)
-describe the annotation procedure and use of AI assistance.
-
-Tests use synthetic predictions and simulated failures. They validate software behavior;
-they are separate from the recorded GPU experiment and manual annotations.
+Weights, corpus caches, environments and scratch files are ignored. Full ledgers
+and inference receipts are in the separate evidence ZIP. Reported ablations and
+negative results retain their code; obsolete utilities are archived outside Git.

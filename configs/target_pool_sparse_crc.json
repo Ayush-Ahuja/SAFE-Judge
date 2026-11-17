@@ -1,0 +1,8 @@
+{
+  "query_counts": [5, 10, 43],
+  "label_budget": 430,
+  "alphas": [0.05],
+  "repetitions": 100,
+  "first_seed": 0,
+  "grid_steps": 500
+}

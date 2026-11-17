@@ -1,0 +1,11 @@
+{
+  "split_seed": 20261112,
+  "held_out_queries": 13,
+  "query_counts": [5, 10, 15, 20, 30],
+  "label_budgets": [120, 300, 600],
+  "alphas": [0.05, 0.10],
+  "repetitions": 100,
+  "first_seed": 0,
+  "grid_steps": 500,
+  "full_query_reference": true
+}

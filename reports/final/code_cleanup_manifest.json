@@ -1,0 +1,92 @@
+{
+  "archive_root": "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge-local-archive\\2026-11-17-final-submission\\publication_code_cleanup",
+  "actions": [
+    {
+      "action": "rename",
+      "source": "src/evaluation/policy_research.py",
+      "destination": "src/evaluation/review_metrics.py",
+      "original_sha256": "626b29156f0a068cf8a49d394b8ca7e724e04b4dc0708388e561e64d5691a819"
+    },
+    {
+      "action": "rename",
+      "source": "scripts/policy_research_inputs.py",
+      "destination": "scripts/experiment_inputs.py",
+      "original_sha256": "834e72fc486cb6a02e3c49b6ee91803f86b20b76f3cd3bf6e9db6ba12c877438"
+    },
+    {
+      "action": "rename",
+      "source": "scripts/run_policy_ideas.py",
+      "destination": "scripts/run_error_predictor_ablation.py",
+      "original_sha256": "a4a280f27682b80993c3e4d33402362ff02e7e57950c2024ddc2df35cbd71f08"
+    },
+    {
+      "action": "rename",
+      "source": "configs/policy_research.json",
+      "destination": "configs/error_predictor_ablation.json",
+      "original_sha256": "015d0569c0de396e7e130cefd035e6ba84a254e1775d4f49924153c01c2507a0"
+    },
+    {
+      "action": "rename",
+      "source": "scripts/prepare_human_research_assets.py",
+      "destination": "scripts/prepare_retrieval_inputs.py",
+      "original_sha256": "df398d71048239424cc30e971e0f7bc61be00bd0125dcc24407b0a89721f5d99"
+    },
+    {
+      "action": "rename",
+      "source": "configs/human_strategy_sources.json",
+      "destination": "configs/retrieval_sources.json",
+      "original_sha256": "1e4166dedfe6ac85dbac553107974240e37d35c2fd0fde3a475ebfb48c2e9ce8"
+    },
+    {
+      "action": "archive",
+      "source": "scripts/build_human_strategy_report.py",
+      "destination": "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge-local-archive\\2026-11-17-final-submission\\publication_code_cleanup\\archived\\scripts\\build_human_strategy_report.py",
+      "reason": "One-time historical report collator; final builder uses curated tables.",
+      "sha256": "b098611293bcfc95815d1ebca25dca6fd9ef75b88bedf6f2dfea441e1c109595"
+    },
+    {
+      "action": "archive",
+      "source": "scripts/analyze_policy_research.py",
+      "destination": "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge-local-archive\\2026-11-17-final-submission\\publication_code_cleanup\\archived\\scripts\\analyze_policy_research.py",
+      "reason": "One-time historical report collator; final tables and intervals are released.",
+      "sha256": "e07a799ecffb001d72dbe70a81a5e0aebee753dc559ad21ea6a9ac209d56e490"
+    },
+    {
+      "action": "archive",
+      "source": "scripts/prepare_human_strategy_stress.py",
+      "destination": "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge-local-archive\\2026-11-17-final-submission\\publication_code_cleanup\\archived\\scripts\\prepare_human_strategy_stress.py",
+      "reason": "Superseded manifest preparation; canonical inference inputs are released.",
+      "sha256": "371123bb63410342daa9308c8afe11337dc7623c7f8196c89b773f825188d0ba"
+    },
+    {
+      "action": "archive",
+      "source": "scripts/prepare_policy_research.py",
+      "destination": "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge-local-archive\\2026-11-17-final-submission\\publication_code_cleanup\\archived\\scripts\\prepare_policy_research.py",
+      "reason": "Downloader for an excluded auxiliary collection.",
+      "sha256": "0928da050a027ee389fcf4dcfb534f593da353051bb3bc5c09f578007273cf8f"
+    },
+    {
+      "action": "archive",
+      "source": "configs/policy_research_sources.json",
+      "destination": "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge-local-archive\\2026-11-17-final-submission\\publication_code_cleanup\\archived\\configs\\policy_research_sources.json",
+      "reason": "Source list used only by the archived auxiliary downloader.",
+      "sha256": "4aa9ae41daafb2a5c99b0fcd306cb702fff9c179a68465b102206859de66a5e1"
+    },
+    {
+      "action": "archive",
+      "source": "scripts/cleanup_submission.py",
+      "destination": "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge-local-archive\\2026-11-17-final-submission\\publication_code_cleanup\\archived\\scripts\\cleanup_submission.py",
+      "reason": "One-time workspace housekeeping; not an experiment or reproduction entry point.",
+      "sha256": "5a2a6d683beee1a32662fda29322f18e03997d41d023f373c6425831584df5d8"
+    },
+    {
+      "action": "archive",
+      "source": "scripts/prepare_final_evidence.py",
+      "destination": "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge-local-archive\\2026-11-17-final-submission\\publication_code_cleanup\\archived\\scripts\\prepare_final_evidence.py",
+      "reason": "One-time curation from historical paths; final replay uses released canonical artifacts.",
+      "sha256": "0c2acc37b25c8b0e4df4be7df1c4ead2d56a86725c2cf9a0e8f87885d6fc8653"
+    }
+  ],
+  "git_index_changed": false,
+  "scientific_note": "Algorithm bodies and numeric artifacts unchanged. Historical receipts retain their original paths and hashes; renamed source copies are archived."
+}

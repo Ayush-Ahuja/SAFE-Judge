@@ -1,0 +1,17 @@
+{
+  "selection_data": "Diagnostic discovery on DL2019/Qwen and ChatReport/Phi-3; no biomedical policy metrics inspected",
+  "selected_variant": "local_unguarded",
+  "first_seed": 5000,
+  "repetitions": 10,
+  "human_budget_fractions": [0.10, 0.25, 0.50],
+  "review_config": {
+    "shared_strength": 10.0,
+    "local_strength": 5.0,
+    "local_prior_probability": 0.1,
+    "gate_local": false,
+    "repair_labels": false,
+    "query_weighted": true,
+    "explore_every": 0,
+    "information_bonus": 0.0
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "status": "complete",
+  "offline_tests": 128,
+  "offline_tests_passed": true,
+  "policy_rows_verified": 1260,
+  "canonical_label_contracts_checked": true,
+  "git_index_changed": false,
+  "paper": {
+    "pages": 5,
+    "embedded_fonts": 15,
+    "sha256": "feac937582152491db85e003dc4f1ac30e659390b3c3be59b0c22d36971eaafa"
+  },
+  "supplement": {
+    "pages": 9,
+    "embedded_fonts": 15,
+    "sha256": "baafa4ecad15362d580193f895f905db91ff2aca34843dd161abb55b55a51e08"
+  },
+  "replayed_published_metrics_match": [
+    "covid_reserved selected_local seed6000 budget2000",
+    "dl2020 lara_1_raw seed6000 budget5693"
+  ],
+  "visual_review": "All main and supplement pages rendered and inspected, with enlarged checks of revised tables and text; no clipped plots/tables or missing glyphs; all fonts embedded.",
+  "rank_drop_allocations_independently_checked": 70,
+  "editorial_voice_and_title_checked": true,
+  "approved_title": "SAFE-Judge: Shared Adaptive Feedback for Escalation in Relevance Assessment",
+  "main_paper_result_tables": [
+    "Label error at matched budgets",
+    "DL2020 ranking fidelity: tau, MAE and maximum drop",
+    "DL2019 common-cohort lexical, neural and LARA baselines"
+  ],
+  "tex_overfull_hboxes_or_undefined_errors": 0,
+  "tex_minor_overfull_vbox_pt": 1.166,
+  "tex_minor_overfull_vbox_review": "Main-paper column layout visually checked; no clipped or overlapping content.",
+  "supplement_template": "Stage 2: 11pt A4 article, Times/Courier, 0.8in margins, compact headings, NavyBlue links and course/report header; also matches the proposal style.",
+  "method_naming": "SAFE-Judge in full-method comparisons; query-local terminology retained for components and ablations; original configuration identifiers unchanged.",
+  "supplement_summary_revision": "Experiment summary in simpler language with short definitions and readable table labels.",
+  "code_cleanup_tests": "128 offline tests passed after helper renames and archival; SAFE-Judge COVID and LARA DL2020 replays match published metrics.",
+  "best_means_bold": "Main paper and ten supplement tables highlight best comparable reported means.",
+  "documentation_cleanup": {
+    "docs_before": 12,
+    "docs_after": 6,
+    "markdown_files_checked": 10,
+    "local_links_checked": 21,
+    "retained_markdown_words": 2110,
+    "scientific_code_changed": false,
+    "pdf_content_changed": false
+  },
+  "supplement_language_review": {
+    "pages": 9,
+    "decimal_result_values_preserved": true,
+    "numerical_artifact_checksums_match": true,
+    "table_label_changes": [
+      "Separate thresholds",
+      "Target calibration",
+      "Grade prediction",
+      "Grade-based review"
+    ],
+    "all_pages_rendered_and_reviewed": true,
+    "overfull_or_undefined_errors": 0
+  },
+  "supplement_figures": [
+    "confusion.pdf",
+    "class_calibration.pdf",
+    "selective_risk.pdf",
+    "class_coverage.pdf",
+    "threshold_calibration_cost.pdf",
+    "grade_and_tail_diagnosis.pdf",
+    "ranking_fidelity.pdf"
+  ],
+  "supplement_table_bolding": {
+    "tables": {
+      "half_all_metrics.tex": 15,
+      "ranking.tex": 4,
+      "thresholds.tex": 2,
+      "target_calibration.tex": 4,
+      "density_prediction.tex": 4,
+      "classical_neural.tex": 4,
+      "mechanism.tex": 1,
+      "class_aware.tex": 2,
+      "oosterhuis_matched.tex": 3,
+      "density_review.tex": 2
+    },
+    "highlighted_numeric_cells": 41,
+    "values_and_row_order_match_previous_builder": true,
+    "grouping": "Per dataset or calibration cost. Class-aware results compare the three complete 5%-floor variants. Oosterhuis score error is compared within each budget row.",
+    "class_coverage_counts_and_costs_are_descriptive": true
+  }
+}

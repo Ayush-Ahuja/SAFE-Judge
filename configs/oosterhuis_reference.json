@@ -1,0 +1,90 @@
+{
+  "repository": "google-research/google-research",
+  "revision": "c1c0c1a588be3acd4a52fdcc5400c6839394ae75",
+  "files": [
+    {
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/google-research/google-research/c1c0c1a588be3acd4a52fdcc5400c6839394ae75/high_confidence_ir_eval_using_genai/README.md",
+      "sha256": "9687edf77bbe8eb7138c4a9482eefd40028dcbcedf63767cee68bce4fd7c7b3c",
+      "bytes": 234
+    },
+    {
+      "path": "curves.py",
+      "url": "https://raw.githubusercontent.com/google-research/google-research/c1c0c1a588be3acd4a52fdcc5400c6839394ae75/high_confidence_ir_eval_using_genai/curves.py",
+      "sha256": "c68db60f0334e863a26e2c26c47097903099b4c190469fbfe2d0f00214ab8133",
+      "bytes": 3744
+    },
+    {
+      "path": "datasets.py",
+      "url": "https://raw.githubusercontent.com/google-research/google-research/c1c0c1a588be3acd4a52fdcc5400c6839394ae75/high_confidence_ir_eval_using_genai/datasets.py",
+      "sha256": "f6cad8d6d8aa364473617f6418e2247986fad2447185bbc8d229c3a633091d5d",
+      "bytes": 12893
+    },
+    {
+      "path": "methods.py",
+      "url": "https://raw.githubusercontent.com/google-research/google-research/c1c0c1a588be3acd4a52fdcc5400c6839394ae75/high_confidence_ir_eval_using_genai/methods.py",
+      "sha256": "2f6819868ba1d15f7c67773ab97f92dbf8060dea3b274f79eac09556de342c3b",
+      "bytes": 6910
+    },
+    {
+      "path": "perquery.py",
+      "url": "https://raw.githubusercontent.com/google-research/google-research/c1c0c1a588be3acd4a52fdcc5400c6839394ae75/high_confidence_ir_eval_using_genai/perquery.py",
+      "sha256": "ebf800623c77b1164651e7491bb99406ecf8b9c94f5b44857a67f5baa56f1ba6",
+      "bytes": 4200
+    },
+    {
+      "path": "run.sh",
+      "url": "https://raw.githubusercontent.com/google-research/google-research/c1c0c1a588be3acd4a52fdcc5400c6839394ae75/high_confidence_ir_eval_using_genai/run.sh",
+      "sha256": "bb110c650f4c101d3e3cbea8fb381f9f3aa2bbf8e0c51a9405893500c1feceea",
+      "bytes": 843
+    },
+    {
+      "path": "sweep.py",
+      "url": "https://raw.githubusercontent.com/google-research/google-research/c1c0c1a588be3acd4a52fdcc5400c6839394ae75/high_confidence_ir_eval_using_genai/sweep.py",
+      "sha256": "ba510e18ff91d1f122e8344c1b53f2ec24b1f3207e08c9f26b5dd0c903f7a96f",
+      "bytes": 5435
+    },
+    {
+      "path": "utils.py",
+      "url": "https://raw.githubusercontent.com/google-research/google-research/c1c0c1a588be3acd4a52fdcc5400c6839394ae75/high_confidence_ir_eval_using_genai/utils.py",
+      "sha256": "466e79fb3ec1bd7e33f0138d28f5e59fc738b5cacbd2f9c9df1843342848326f",
+      "bytes": 7670
+    },
+    {
+      "path": "data/trecdl.npz",
+      "url": "https://raw.githubusercontent.com/google-research/google-research/c1c0c1a588be3acd4a52fdcc5400c6839394ae75/high_confidence_ir_eval_using_genai/data/trecdl.npz",
+      "sha256": "814e785e85b80a3768cd2c2bcee6acf709e4f9aa70afb7e580c2bfdeb8211e76",
+      "bytes": 357566
+    },
+    {
+      "path": "data/robust04.npz",
+      "url": "https://raw.githubusercontent.com/google-research/google-research/c1c0c1a588be3acd4a52fdcc5400c6839394ae75/high_confidence_ir_eval_using_genai/data/robust04.npz",
+      "sha256": "495add7a2fee863d77e3296a1dab82ebb3e08f57cd7886e2aedc66bcb45245b5",
+      "bytes": 328909
+    }
+  ],
+  "cache_directory": "cache/research/oosterhuis_c1c0c1a",
+  "reference_experiment": {
+    "first_seed": 0,
+    "repetitions": 100,
+    "calibration_queries": [
+      10,
+      50,
+      100
+    ],
+    "bootstrap_samples": 10000,
+    "scope": "Selected Figure 2 points using unmodified released methods; 100 repetitions versus 500 in the paper"
+  },
+  "matched_experiment": {
+    "first_seed": 11000,
+    "repetitions": 10,
+    "human_fractions": [
+      0.1,
+      0.25,
+      0.5
+    ],
+    "topn": 10,
+    "binary_relevance_threshold": 2,
+    "scope": "Binary top-10 fixed-pool adaptation on the same released Flan-UL2 predictions; Oosterhuis methods evaluated as metric estimators"
+  }
+}

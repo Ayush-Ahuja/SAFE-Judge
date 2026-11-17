@@ -1,6 +1,7 @@
 """Small, dependency-free artifact and checkpoint helpers."""
 
 import csv
+import gzip
 import hashlib
 import json
 import math
@@ -8,6 +9,12 @@ import os
 from pathlib import Path
 import sqlite3
 import tempfile
+
+
+def read_gzip_json(path):
+    """Read a compressed JSON acquisition ledger or inference artifact."""
+    with gzip.open(path, 'rt', encoding='utf-8') as stream:
+        return json.load(stream)
 
 
 def atomic_text(path, text):

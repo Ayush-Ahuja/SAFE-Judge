@@ -1,0 +1,14 @@
+{
+  "source_sha256": {
+    "configs/diagnostic_review_selected.json": "46934f86fcdda177c3dc7fcc673c97554a30edd2781a2bbb1b2fb510b796a425",
+    "src/calibration/class_thresholds.py": "92b69c3dabbbc23cf40bf4a614355323ad820e3d540b9bd9368657f983e1eb65",
+    "src/calibration/diagnostic_review.py": "280747c5160eba165d7e2ea6f5bd87f5ea43c547f3942fdbe223a3de076e4e97",
+    "src/baselines/lara.py": "df2b461e6edc2be888aae35dc695c8db2979ae586f3952961592cec8ba29087f"
+  },
+  "inputs": {
+    "results\\transfer\\qwen35_covid_proposal_v1_dataset_full\\runs\\trec_covid\\predictions.csv": "c708cacb376a7fe39073b5d4a0884c91618c37a6eae6c7478d2c6b627c6601d5",
+    "results\\transfer\\qwen35_covid_proposal_v1_dataset_full\\inputs\\trec_covid.metadata.json": "7696b6e3bb9546573f59b6994277196e2260660cfa5fbb839b680cd725dd6681"
+  },
+  "target_calibration": "1000 or 200 labels on the same ten development topics; full-pool total budget 2500; fixed C=1 Platt, no hyperparameter search",
+  "thresholds": "20 seeds, 100/200/500 calibration labels, 25/50/75 percent total cost on 4000 reserved pairs; fixed settings inherited from class_threshold_experiment.json"
+}

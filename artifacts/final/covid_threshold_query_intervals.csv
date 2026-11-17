@@ -1,0 +1,6 @@
+comparator,difference,low,high,defined_draws,draws,scope
+common_paid,-0.01657043255237181,-0.033348945205472824,0.007871664656883439,2000,2000,"Conditional paired query resampling; average class risk across 20 repetitions, baseline allocations reused modulo ten seeds"
+raw_confidence,-0.010286158060004824,-0.02596475503301188,0.01489651260976648,2000,2000,"Conditional paired query resampling; average class risk across 20 repetitions, baseline allocations reused modulo ten seeds"
+lara_1_raw,-0.0022650122342933177,-0.014861226588188819,0.020870003217901507,2000,2000,"Conditional paired query resampling; average class risk across 20 repetitions, baseline allocations reused modulo ten seeds"
+lara_1_upstream_smooth,-0.016428750335217956,-0.03346264510550111,0.009652799574427929,2000,2000,"Conditional paired query resampling; average class risk across 20 repetitions, baseline allocations reused modulo ten seeds"
+selected_local,0.036640653818911934,0.016277573051991276,0.058304901889818773,2000,2000,"Conditional paired query resampling; average class risk across 20 repetitions, baseline allocations reused modulo ten seeds"

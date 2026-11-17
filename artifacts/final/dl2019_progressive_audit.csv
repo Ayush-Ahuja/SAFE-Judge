@@ -1,0 +1,9 @@
+dataset,method,feasibility_gate,runs,releases,mean_total_labels,mean_quality_checks,skipped_checks,observed_violations
+dl2019_qwen,lara_1_raw,False,10,0,9260.0,1852.0,0,0
+dl2019_qwen,lara_1_raw,True,10,0,9260.0,1852.0,0,0
+dl2019_qwen,lara_topics_upstream_smooth,False,10,0,9260.0,1852.0,0,0
+dl2019_qwen,lara_topics_upstream_smooth,True,10,0,9260.0,1852.0,0,0
+dl2019_qwen,raw_confidence,False,10,0,9260.0,1852.0,0,0
+dl2019_qwen,raw_confidence,True,10,0,9260.0,1852.0,0,0
+dl2019_qwen,selected_local,False,10,2,8609.9,1852.0,0,0
+dl2019_qwen,selected_local,True,10,2,8609.9,1852.0,0,0

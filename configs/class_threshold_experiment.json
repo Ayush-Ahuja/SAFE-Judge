@@ -1,0 +1,21 @@
+{
+  "seeds": [6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019],
+  "labels_per_calibration_query": [10, 20, 50],
+  "primary_labels_per_query": 20,
+  "calibration_queries": 10,
+  "source_query_seed": 20261116,
+  "human_fractions": [0.25, 0.5, 0.75],
+  "minimum_class_coverage": 0.05,
+  "minimum_calibration_tail_support": 5,
+  "objectives": ["worst_class", "total_error"],
+  "primary_objective": "worst_class",
+  "primary_lara_comparator": "lara_1_raw",
+  "bootstrap_draws": 2000,
+  "bootstrap_seed": 20261117,
+  "cost": "G=floor(human_fraction*N_test), threshold review=G-C. Calibration labels on separate queries are charged once. Baselines spend G directly on test review.",
+  "selection": "Every feasible pair of within-class confidence prefixes is considered using target scores only. Minimize maximum Jeffreys-smoothed calibration tail error; then estimated overall error, then larger minimum calibration support, then balanced class coverage, then negative acceptance count. Unsupported tails receive risk 1.",
+  "class_floor": "Require at least ceil(0.05*N_c) accepted raw predictions in each class. Original LARA is retained even if a class is empty. Supplementary reserved-class LARA protects the most confident 5% of each raw class before acquisition, with their raw labels frozen.",
+  "scenarios": ["dl2020_source", "covid_target", "covid_source"],
+  "ranking": "59 official DL2020 runs, original top-ten positions. Primary binary nDCG>=2. Also graded nDCG using linear 0/1/2/3 gains matching trec_eval defaults; automatic binary labels map to grades 0/2, reviewed pairs retain human grades. Both use zero gain for unjudged positions.",
+  "scope": "Exploratory previously inspected benchmarks. Fixed frozen Qwen binary scores. COVID retains cached strict grade>=2 rubric, not pending proposal-aligned grade>=1 inference. No fine-tuning, new inference, statistical guarantee or novelty claim. Configuration saved before threshold evaluation."
+}

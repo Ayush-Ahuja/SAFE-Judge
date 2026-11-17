@@ -1,0 +1,16 @@
+{
+  "first_seed": 1000,
+  "repetitions": 20,
+  "human_budget_fractions": [0.10, 0.25, 0.50],
+  "pilot_labels_per_query": [2, 5, 10],
+  "query_feature_scale": 2.0,
+  "learned_scores": ["global", "query", "disagreement", "query_disagreement"],
+  "audit_budgets": {"dl2019": [430, 926, 1852], "chatreport": [66, 165, 330]},
+  "audit_bins_per_class": [2, 4],
+  "audit_score_methods": ["confidence", "query", "disagreement", "query_disagreement"],
+  "audit_pilot_labels_per_query": 2,
+  "alpha": 0.05,
+  "class_selective_risk_target": 0.20,
+  "delta": 0.05,
+  "minimum_class_coverage": 0.05
+}

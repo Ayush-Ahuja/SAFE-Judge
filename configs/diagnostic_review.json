@@ -1,0 +1,18 @@
+{
+  "first_seed": 3000,
+  "repetitions": 10,
+  "human_budget_fractions": [0.10, 0.25, 0.50],
+  "shared_strength": 10.0,
+  "local_strength": 5.0,
+  "local_prior_probability": 0.1,
+  "repair_threshold": 0.75,
+  "variants": {
+    "shared_only": {"global_only": true, "repair_labels": false, "query_weighted": false, "explore_every": 0},
+    "local_unguarded": {"gate_local": false, "repair_labels": false, "explore_every": 0},
+    "local_gated": {"repair_labels": false, "explore_every": 0},
+    "local_repair": {"explore_every": 0},
+    "local_repair_explore": {},
+    "local_repair_value": {"information_bonus": 0.25},
+    "local_repair_pair": {"query_weighted": false}
+  }
+}

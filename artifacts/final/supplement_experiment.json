@@ -1,0 +1,8 @@
+{
+  "status": "complete",
+  "rows": 623,
+  "design_sha256": "dc3e6a00a87dba18f0146db38ecfa4bc5bdd0fee8f8180c314bb957fe39e683a",
+  "driver_sha256": "c2456f07b302aebe606bf9a94e97feeb2054dfbc9cc9ec5efd81dc4dacecbc80",
+  "unique_ledgers_checked": true,
+  "scope": "Exploratory CPU evaluation on previously inspected benchmarks; gold oracle, no new inference."
+}

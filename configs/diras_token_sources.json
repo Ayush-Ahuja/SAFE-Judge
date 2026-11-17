@@ -1,0 +1,24 @@
+{
+  "repository": "https://github.com/EdisonNi-hku/DIRAS",
+  "revision": "795ef8d20fe2729d313ca2d1f7cc6c096ea9c714",
+  "files": [
+    {
+      "path": "small_llm_results/gc_phi3_2e.pkl",
+      "url": "https://raw.githubusercontent.com/EdisonNi-hku/DIRAS/795ef8d20fe2729d313ca2d1f7cc6c096ea9c714/small_llm_results/gc_phi3_2e.pkl",
+      "sha256": "75dcdb5d3a2ab0b1bf8d21905621246e9be21b1e00b40a8d7216d1379aac670e",
+      "bytes": 229914
+    },
+    {
+      "path": "small_llm_results/gc_llama_2e.pkl",
+      "url": "https://raw.githubusercontent.com/EdisonNi-hku/DIRAS/795ef8d20fe2729d313ca2d1f7cc6c096ea9c714/small_llm_results/gc_llama_2e.pkl",
+      "sha256": "b0bdd6cb82de41b8ef997236279160172466151d8ee1fa5c27216f1f28d66fac",
+      "bytes": 207031
+    },
+    {
+      "path": "small_llm_results/gc_llama_2e.csv",
+      "url": "https://raw.githubusercontent.com/EdisonNi-hku/DIRAS/795ef8d20fe2729d313ca2d1f7cc6c096ea9c714/small_llm_results/gc_llama_2e.csv",
+      "sha256": "ad6425ae1c0452d9734320a645ae94b9a9594e6e7a7a6a494171bc640f9bb0c4",
+      "bytes": 3045410
+    }
+  ]
+}

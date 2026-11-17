@@ -1,0 +1,15 @@
+{
+  "cohorts": ["dl2020_all", "trec_covid_locked", "chatreport_all"],
+  "seeds": [6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009],
+  "human_fractions": [0.25, 0.5, 0.75],
+  "minimum_class_coverages": [0.05, 0.2],
+  "primary_class_coverage": 0.05,
+  "batch_size": 32,
+  "variants": ["local_minimax", "shared_minimax", "local_query_error"],
+  "bootstrap_draws": 2000,
+  "bootstrap_seed": 20261118,
+  "scope": "Exploratory development after inspecting earlier benchmark results. No independent confirmation, novelty claim or formal guarantee. No fine-tuning or new model inference. COVID retains cached strict grade>=2 target.",
+  "cost": "All sentinel and adaptive review labels purchased from the target pool count once toward the exact total budget. No external development labels or new hyperparameter search. Frozen prior strengths are reused.",
+  "class_support": "Coverage floor is enforced within each original raw predicted class; labels cannot be flipped. Both 5% and 20% settings are retained. Neither operational floor was specified numerically by the instructor.",
+  "selection": "At each batch, enumerate all feasible remaining acceptance-count splits and accept within-class prefixes of estimated error to minimize predicted worst-class risk. Query-error ablation sorts and sums query-weighted predicted error instead. Buy up to 32 complementary review candidates, then update."
+}

@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Please cite this course research report when using its code or experimental artifacts."
+title: "SAFE-Judge: Shared Adaptive Feedback for Escalation in Relevance Assessment"
+type: software
+authors:
+  - family-names: Ahuja
+    given-names: Ayush
+repository-code: "https://github.com/Ayush-Ahuja/SAFE-Judge"
+version: "final-course-report-2026-11-17"
+date-released: 2026-11-17
+abstract: "Shared and query-local error feedback for budgeted relevance-label review, with explicit annotation costs and class/ranking diagnostics."

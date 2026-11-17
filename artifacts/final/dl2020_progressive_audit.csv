@@ -1,0 +1,4 @@
+dataset,method,runs,releases,mean_coverage,mean_human_labels,mean_quality_check_labels,observed_violations
+dl2020_all,selected_local,10,0,0.0,11386.0,1026.0,0
+dl2020_all,lara_1_raw,10,0,0.0,11386.0,1140.0,0
+dl2020_all,raw_confidence,10,0,0.0,11386.0,2280.0,0

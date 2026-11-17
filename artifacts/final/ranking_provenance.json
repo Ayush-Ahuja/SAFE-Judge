@@ -1,0 +1,13 @@
+{
+  "systems": 59,
+  "queries": 54,
+  "ranked_positions": 31860,
+  "unjudged_top10_positions": 1315,
+  "unique_unjudged_top10_pairs": 1098,
+  "systems_at_least_95percent_judged_top10": 53,
+  "unjudged_convention": "Unjudged positions remain unjudged and receive zero gain under both reference and mixed qrels.",
+  "source_archive_sha256": "a12c1f1e5d7b279a019dbb8ac3ff35233c08e5bc45f6e191619fbd27668e8a0a",
+  "source_url": "https://www.cs.unh.edu/~dietz/autograder/data-dl20.tar.xz",
+  "official_count_reference": "https://trec.nist.gov/pubs/trec29/papers/OVERVIEW.DL.pdf, Table 3",
+  "metric": "Binary nDCG@10, grade>=2 positive. Both reference and mixed qrels use the binary target. Original submitted top-ten rank positions retained."
+}

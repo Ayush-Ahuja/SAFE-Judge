@@ -1,0 +1,4 @@
+design,dataset,risk_unit,policies,zero_coverage_policies,observed_target_violations
+stratified_audit,dl2019,pooled,2400,2335,0
+stratified_audit,dl2019,query_balanced,2400,2355,0
+candidate_audit,dl2019,query_balanced,1200,364,0

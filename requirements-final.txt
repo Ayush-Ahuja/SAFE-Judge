@@ -1,0 +1,5 @@
+# CPU figure/table generation, statistical analysis and cached-score replay.
+-r requirements-lexical-plots.txt
+-r requirements-lara.txt
+# For merging the already compiled main paper and supplement:
+pypdf==5.4.0

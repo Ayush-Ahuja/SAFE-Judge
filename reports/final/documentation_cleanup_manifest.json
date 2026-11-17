@@ -1,0 +1,126 @@
+{
+  "archive_root": "C:\\Users\\AYUSH AHUJA\\Documents\\Sem 7\\COL764\\Project\\SAFE-Judge-local-archive\\2026-11-17-final-submission\\documentation_cleanup",
+  "files": [
+    {
+      "path": "README.md",
+      "original_bytes": 4952,
+      "original_sha256": "623938e4eb9a8432b70a5d57e791600d3606cb64d850edc4dd98f9df6c740f9a",
+      "action": "shortened",
+      "current_bytes": 2882
+    },
+    {
+      "path": "DATA_NOTICE.md",
+      "original_bytes": 1338,
+      "original_sha256": "cfe1e4622f9880f0b26153baac57e64441b057ef7dfc93d0bc974212990683f9",
+      "action": "shortened",
+      "current_bytes": 838
+    },
+    {
+      "path": "artifacts/README.md",
+      "original_bytes": 2236,
+      "original_sha256": "c6e66fc8f37e5efd5813dcd40b8da34e57ea776be543799aa937107734dd26bf",
+      "action": "shortened",
+      "current_bytes": 1530
+    },
+    {
+      "path": "reports/ai_usage_statement.md",
+      "original_bytes": 1847,
+      "original_sha256": "bc5fa4f80d87a18e7931032b14ff93e73ec336c9bdfce1b8d51d43c6ddeffe38",
+      "action": "shortened",
+      "current_bytes": 1126
+    },
+    {
+      "path": "docs/colab.md",
+      "original_bytes": 4552,
+      "original_sha256": "eaf7318f6adb8495712aa60aeaf701085cb21d9af12d8c44ed9d791ca461af94",
+      "action": "shortened",
+      "current_bytes": 1514
+    },
+    {
+      "path": "docs/cross_encoder.md",
+      "original_bytes": 11578,
+      "original_sha256": "6d919dca3e545ed904765ad6656eb5f601727063ebc4ba7c6ab7937da327bc5e",
+      "action": "archived",
+      "current_bytes": 0
+    },
+    {
+      "path": "docs/cross_encoder_validation.md",
+      "original_bytes": 6839,
+      "original_sha256": "5a807893ed6438b1d2887c7afe19d4f35eed8b7efafebf1945a099361786b3b6",
+      "action": "archived",
+      "current_bytes": 0
+    },
+    {
+      "path": "docs/experiment_index.md",
+      "original_bytes": 4418,
+      "original_sha256": "b97ae8d4b45df6d17aebaa0340b132e1d6957541107e0712d16b46e2f9f3130f",
+      "action": "shortened",
+      "current_bytes": 2319
+    },
+    {
+      "path": "docs/failure_review.md",
+      "original_bytes": 2051,
+      "original_sha256": "8e09a52aae47e985188b4cfe91df22b0e8ce512e25081616be04e94dc7134c50",
+      "action": "shortened",
+      "current_bytes": 1112
+    },
+    {
+      "path": "docs/finite_pool_certificate.md",
+      "original_bytes": 5662,
+      "original_sha256": "59c64bcb6953d2e1ad9ba763a6a3dcd0198fbfab6839bf19982a2759cb17ea90",
+      "action": "archived",
+      "current_bytes": 0
+    },
+    {
+      "path": "docs/lara.md",
+      "original_bytes": 12205,
+      "original_sha256": "6af9bf8ae7360f7bccbbc6c4644ab720548b5ba4cdc39b2bee3e6a4b2d5655f0",
+      "action": "shortened",
+      "current_bytes": 1448
+    },
+    {
+      "path": "docs/lara_validation.md",
+      "original_bytes": 7073,
+      "original_sha256": "6d7132cd27f96e1eda1f959b0fd64079391ffe0a0d2343e0c394eac254b2e83e",
+      "action": "archived",
+      "current_bytes": 0
+    },
+    {
+      "path": "docs/lexical_active_learning.md",
+      "original_bytes": 12492,
+      "original_sha256": "b7a5dfe4aa5f75cd8e07ff96e7c0acc87e0d61ccc4bdf34f990e20f9ef588225",
+      "action": "archived",
+      "current_bytes": 0
+    },
+    {
+      "path": "docs/lexical_baseline_validation.md",
+      "original_bytes": 3900,
+      "original_sha256": "c5c4e13109d4e440dd0f01e093b7277610aca52ba5ef96f40334de6d24e6825a",
+      "action": "archived",
+      "current_bytes": 0
+    },
+    {
+      "path": "docs/repository_guide.md",
+      "original_bytes": 2491,
+      "original_sha256": "c34851928cc8a33449fdba0fbad2c376cd92d3c9fbd2e43b1d97a492f897b373",
+      "action": "archived",
+      "current_bytes": 0
+    },
+    {
+      "path": "docs/reproduce_final.md",
+      "original_bytes": 5704,
+      "original_sha256": "9c525bf0c16413e2bba9842c3d34690d021ec56bee8d96429a65a8957ab36808",
+      "action": "shortened",
+      "current_bytes": 2823
+    }
+  ],
+  "added": [
+    "docs/baselines.md"
+  ],
+  "docs_before": 12,
+  "docs_after": 6,
+  "original_bytes": 89338,
+  "current_bytes": 17905,
+  "scientific_code_changed": false,
+  "git_index_changed": false
+}

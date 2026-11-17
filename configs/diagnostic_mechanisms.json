@@ -1,0 +1,9 @@
+{
+  "first_seed": 7000,
+  "repetitions": 10,
+  "human_budget_fractions": [0.10, 0.25, 0.50],
+  "ranking_mixtures": [0.0, 0.25, 0.50, 1.0],
+  "primary_ranking_mixture": 0.25,
+  "mechanism_variants": ["real_local_pair", "shuffled_local_pair", "real_shared_pair", "shuffled_shared_pair"],
+  "scope": "Exploratory mechanism and ranking-objective ablation on previously studied DL2019; not a new blind benchmark"
+}

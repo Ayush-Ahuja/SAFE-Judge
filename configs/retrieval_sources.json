@@ -1,0 +1,58 @@
+{
+  "files": [
+    {
+      "path": "cache/research/trec_covid/trec-covid.zip",
+      "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/trec-covid.zip",
+      "sha256": "120f42a7864d2214234537733c0d2c6684e42fdfafff2c5eacf98afca6656aa0"
+    },
+    {
+      "path": "cache/research/trec_covid/test.tsv",
+      "url": "https://huggingface.co/datasets/BeIR/trec-covid-qrels/resolve/532ac68ee6756ac22c9346eebf65bd3c6a042e10/test.tsv",
+      "sha256": "10669ab7d526cb04f52079139fd88c3d467a0776441b046567f540582798982b"
+    },
+    {
+      "path": "cache/research/dl19_public_runs/BM25.jsonl",
+      "url": "https://huggingface.co/datasets/castorini/rank_llm_data/resolve/39db0a25a552dd2a12012df22029686bf7fdc050/retrieve_results/BM25/retrieve_results_dl19_top100.jsonl",
+      "sha256": "ec396c5725d0cec98739de9aff9fd6785da09e56fd21bee5b52dc19806f06899"
+    },
+    {
+      "path": "cache/research/dl19_public_runs/SPLADE_P_P_ENSEMBLE_DISTIL.jsonl",
+      "url": "https://huggingface.co/datasets/castorini/rank_llm_data/resolve/39db0a25a552dd2a12012df22029686bf7fdc050/retrieve_results/SPLADE_P_P_ENSEMBLE_DISTIL/retrieve_results_dl19_top100.jsonl",
+      "sha256": "1154bb68a3dfa2c03df024282ae3412e49b561ccaf5b0612bbcfb34333ba56a6"
+    },
+    {
+      "path": "cache/research/diras_795ef8d/small_llm_results/gc_phi3_2e.pkl",
+      "url": "https://raw.githubusercontent.com/EdisonNi-hku/DIRAS/795ef8d20fe2729d313ca2d1f7cc6c096ea9c714/small_llm_results/gc_phi3_2e.pkl",
+      "sha256": "75dcdb5d3a2ab0b1bf8d21905621246e9be21b1e00b40a8d7216d1379aac670e"
+    },
+    {
+      "path": "cache/research/diras_795ef8d/small_llm_results/gc_llama_2e.pkl",
+      "url": "https://raw.githubusercontent.com/EdisonNi-hku/DIRAS/795ef8d20fe2729d313ca2d1f7cc6c096ea9c714/small_llm_results/gc_llama_2e.pkl",
+      "sha256": "b0bdd6cb82de41b8ef997236279160172466151d8ee1fa5c27216f1f28d66fac"
+    },
+    {
+      "path": "cache/research/diras_795ef8d/small_llm_results/gc_llama_2e.csv",
+      "url": "https://raw.githubusercontent.com/EdisonNi-hku/DIRAS/795ef8d20fe2729d313ca2d1f7cc6c096ea9c714/small_llm_results/gc_llama_2e.csv",
+      "sha256": "ad6425ae1c0452d9734320a645ae94b9a9594e6e7a7a6a494171bc640f9bb0c4"
+    }
+  ],
+  "retrieval_download_metadata": {
+    "revision": "39db0a25a552dd2a12012df22029686bf7fdc050",
+    "files": [
+      {
+        "method": "BM25",
+        "url": "https://huggingface.co/datasets/castorini/rank_llm_data/resolve/39db0a25a552dd2a12012df22029686bf7fdc050/retrieve_results/BM25/retrieve_results_dl19_top100.jsonl",
+        "sha256": "ec396c5725d0cec98739de9aff9fd6785da09e56fd21bee5b52dc19806f06899",
+        "bytes": 2000369,
+        "filename": "BM25.jsonl"
+      },
+      {
+        "method": "SPLADE_P_P_ENSEMBLE_DISTIL",
+        "url": "https://huggingface.co/datasets/castorini/rank_llm_data/resolve/39db0a25a552dd2a12012df22029686bf7fdc050/retrieve_results/SPLADE_P_P_ENSEMBLE_DISTIL/retrieve_results_dl19_top100.jsonl",
+        "sha256": "1154bb68a3dfa2c03df024282ae3412e49b561ccaf5b0612bbcfb34333ba56a6",
+        "bytes": 1844101,
+        "filename": "SPLADE_P_P_ENSEMBLE_DISTIL.jsonl"
+      }
+    ]
+  }
+}

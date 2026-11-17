@@ -1,0 +1,12 @@
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Model & Brier & Error AUC & Grade F1 & Grade $\kappa_w$ \\
+\midrule
+Grade LDA, score & 0.1066 & 0.8505 & 0.3078 & 0.4601 \\
+Grade logistic, full features & 0.1043 & 0.8545 & 0.3721 & 0.4768 \\
+Grade QDA, full features & 0.1142 & 0.7598 & \textbf{0.3982} & 0.4738 \\
+Grade QDA, score & 0.1100 & 0.8136 & 0.3553 & \textbf{0.4810} \\
+Binary Platt scaling & \textbf{0.1033} & \textbf{0.8594} & -- & -- \\
+Original assessor & 0.1239 & 0.7693 & -- & -- \\
+\bottomrule
+\end{tabular}

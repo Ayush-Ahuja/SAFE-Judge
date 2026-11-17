@@ -1,0 +1,3 @@
+dataset,method,seeds,mean_query_auto_error,mean_pair_auto_error,mean_automatic_errors
+dl2020_all,shared_only,10,0.012698424195057062,0.017486386790795713,199.1
+dl2020_all,without_query_size_weight,10,0.005396444522693576,0.006490426839978922,73.9

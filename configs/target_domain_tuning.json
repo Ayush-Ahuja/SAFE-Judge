@@ -1,0 +1,17 @@
+{
+  "purpose": "Exploratory target-domain hyperparameter and probability-calibration selection using development queries only",
+  "development_cv_seeds": [7100, 7101, 7102],
+  "development_review_fractions": [0.1, 0.25, 0.5],
+  "evaluation_seeds": [6000, 6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009],
+  "total_human_fractions": [0.3, 0.5, 0.75],
+  "covid_development_queries": "Use the existing 10 development queries, retaining the existing 40 evaluation queries",
+  "chatreport_development_queries": 3,
+  "chatreport_split_seeds": [20261114, 20261115, 20261116],
+  "shared_strengths": [10.0, 2.0, 50.0],
+  "local_strengths": [5.0, 1.0, 20.0],
+  "lara_learning_rates": [0.01, 0.003, 0.03],
+  "score_views": ["raw", "target_platt"],
+  "selection_objective": "Mean query-average automatic error across validation folds, review fractions and seeds",
+  "label_cost": "All development pairs are paid once, reused across candidate evaluations, and final human-labeled. Remaining budget buys labels on the other queries. Full-pool baselines may spend the same total budget anywhere in the pool.",
+  "scope": "Existing benchmark outcomes have been inspected. These are exploratory adaptation experiments. ChatReport split repetitions overlap."
+}

@@ -1,0 +1,20 @@
+{
+  "first_seed": 5000,
+  "repetitions": 10,
+  "human_budget_fractions": [0.10, 0.25, 0.50],
+  "primary_method": "local_repair_explore",
+  "source_calibration_queries": 10,
+  "source_labels_per_query": 60,
+  "target_labels_per_query": 60,
+  "source_split_seed": 20261113,
+  "review_config": {
+    "shared_strength": 10.0,
+    "local_strength": 5.0,
+    "local_prior_probability": 0.1,
+    "repair_threshold": 0.75,
+    "query_weighted": true,
+    "explore_every": 10,
+    "information_bonus": 0.0
+  },
+  "selection_note": "Primary algorithm fixed from human-supervision hypothesis before biomedical model-performance evaluation; exploratory benchmarks are already known."
+}

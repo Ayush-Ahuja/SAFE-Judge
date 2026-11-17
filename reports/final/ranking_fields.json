@@ -1,0 +1,10 @@
+[
+  "system_ranking_kendall_tau",
+  "system_ranking_kendall_tau_defined",
+  "system_ranking_spearman_rho",
+  "system_ranking_spearman_rho_defined",
+  "high_judgment_system_kendall_tau",
+  "high_judgment_system_kendall_tau_defined",
+  "system_binary_ndcg10_mae",
+  "system_binary_ndcg10_mae_defined"
+]

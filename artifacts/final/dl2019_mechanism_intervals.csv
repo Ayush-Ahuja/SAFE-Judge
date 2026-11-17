@@ -1,0 +1,4 @@
+dataset,budget,first,second,queries,first_minus_second,conditional_query_bootstrap_lower,conditional_query_bootstrap_upper,improved_queries,worse_queries,tied_queries
+dl2019,4630,local_unguarded,lara_1_raw,43,-0.023243571613138062,-0.04177775349406942,-0.008013216226683122,26,10,7
+dl2019,4630,real_local_pair,shuffled_local_pair,43,-0.022271837569442125,-0.040023887398848615,-0.008267012645745421,26,13,4
+dl2019,926,ranking_mixture_0.25,ranking_mixture_0.0,43,0.01440566252798724,0.002714719659854444,0.027106109539342074,17,20,6

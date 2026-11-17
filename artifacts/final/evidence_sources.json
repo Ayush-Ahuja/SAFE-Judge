@@ -1,0 +1,40 @@
+{
+  "curator_sha256": "28ff3c097b62d2a9a979d2b864e2990f0a0c6d6cd6f4b3bab95e5df767864d49",
+  "source_sha256": {
+    "results/stage2/dl2019_qwen35_full_v1/progress.json": "19c38f965189146a3bd59ea601f5e4e99f629f61eae1577cbd1f96259fd926ab",
+    "results/transfer/qwen35_transfer_v1_dataset_full/runs/dl2020/progress.json": "c99ff5e05e963eecbc79dd5ce370614f80d5eeb39f1ab9d4c14538b7ab740745",
+    "results/transfer/qwen35_covid_proposal_v1_dataset_full/runs/trec_covid/progress.json": "17b649bc19fab42ea10b7fe4918cb1a305b0b37d77c1fa81b598b3dbe85e4c31",
+    "reports/human_strategy_v1/diagnostic_review_v1.csv": "73631c6d527c2103e9e1febab3316e575c7d7b2c2ce74dd5e67d9abf6b4f5a8b",
+    "reports/human_strategy_v1/diagnostic_mechanisms_v1.csv": "f99cc0b84f608af016810215cf962e65696ed06d054ecdce1e1ec59bbe7e275c",
+    "reports/human_strategy_v1/paired_query_comparisons.csv": "9e4377138939110ef19490ffa765635c8f89fd4a8f64604aac7b1398a0b11eb0",
+    "reports/qwen_transfer_diagnosis_v1/component_summary.csv": "f0e20eae4ab7e35f20cd9c1f4a0fa41d993910c1d88bcb454fec1955bad20108",
+    "reports/class_aware_review_v1/summary.csv": "b915e5067e14108ba6bd8fc5618574b6dceec5256ea64193053a8e9765bcc9c5",
+    "reports/class_threshold_v1/summary.csv": "5bcd6f6c7137bb3db2afdfe4dab9745c9f6ef4df3834419fc850d3c49c6caeef",
+    "reports/class_threshold_v1/paired_query_intervals.csv": "d5112b0fbcf80433d4df0a2610f54abf3deae4833af8af1bfbe632f9038c020b",
+    "reports/class_threshold_v1/oracle_threshold_diagnostic.csv": "6582f43b6c42b4dc6705f1aa84ca2de3e6cf01ff984f4837fb786720107d64bf",
+    "reports/class_threshold_v1/official_run_scores.csv": "0b414c328a7e55fbdb6d80101575be72205d416cc6094dc8ba961d78260f6037",
+    "reports/gaussian_grade_v1/grade_distribution.csv": "62da661d079cadb5ee9a930c408c1a9f7325d4ede668298fda618604f60fd20e",
+    "reports/gaussian_grade_v1/prediction_summary.csv": "9c9700610464aa86fd50cebd62504f62f8f432d7c24507d631fedb712569c9e2",
+    "reports/gaussian_grade_v1/binary_review_summary.csv": "daa78752bce3c654d1a55b7fd66df61bdcaf3ab9ce9199060bac96d05aeca389",
+    "reports/sparse_query_crc_dl2019_v1/summary.csv": "da9414c12a6d93cbc9356592e388ac243646f63d0746e4fef5ada9059af80b7c",
+    "reports/sparse_query_crc_dl2019_v1/target_pool_summary.csv": "84582c53de1cd9418bb9df97df8f26f223c7f20e7357c3fbb3ae1ac05608362b",
+    "reports/policy_research_v1/screening_summary.csv": "52d034d3b698636c77de2e5baea05a1561afc520e003715190f033df3790a971",
+    "reports/policy_research_v1/candidate_audit_summary.csv": "48a21e14c5b4efab00cb6900be7bde3f4a44ebfc8725d1c967a4506f73c47a11",
+    "reports/policy_research_v1/stratified_audit_summary.csv": "87589107ea97cbd6fb584043c7e1362fec62ea5144b03b13edfe7be00ed66aef",
+    "reports/human_strategy_v1/stopping_outcomes.csv": "f613231b10c57da4b6082692d7134b7795cfc4d2b8d8939306d59814005a53f1",
+    "reports/proposal_metrics_v1/audit_summary.csv": "c8cc670b056950f38c233fb40a4e9150a7022d1b367e27134f4ea2b5374ec1f8",
+    "reports/oosterhuis_comparison_v1/oosterhuis_reference_v1.csv": "f9f4cf1db7141ff8ff3bec519f40a76d8b79e61690173fd96060549a2d115bf2",
+    "reports/oosterhuis_comparison_v1/matched_compact.csv": "db3a785f6e504497719056b586ab18890a2d780a59648526a9d0588d4ae0e398",
+    "results/baselines/lexical/dl2019_shared_test_v1/budget_curve.csv": "b007417902e406339e237faf821a8284f562693d482a2dc66c340ffdb55a5e9e",
+    "results/baselines/cross_encoder/dl2019_shared_test_v1/budget_curve.csv": "eb7e827b30c77efcadd7e089bddb4faa1bab25b9688d0f73d01f88eefb564292",
+    "results/baselines/lara/dl2019_shared_test_v1/budget_curve.csv": "a2e4a7873374a81fe3f1dedc754b3dfcca6c8db6a7c80f6d0b9d4acbc810c5b4"
+  },
+  "included_benchmarks": [
+    "DL2019",
+    "DL2020",
+    "TREC-COVID grade>=1"
+  ],
+  "scope": "Only canonical current COVID scores; query-conditioned bootstrap; no new inference; historical discovery is exploratory",
+  "additional_curation_source_sha256": "0c2acc37b25c8b0e4df4be7df1c4ead2d56a86725c2cf9a0e8f87885d6fc8653",
+  "additional_curation_note": "Raw-class threshold coverage recovered from saved DL2020 run receipts; aligned baseline F1/kappa computed from final labels; DL2020 historical boundary tables retained descriptively."
+}

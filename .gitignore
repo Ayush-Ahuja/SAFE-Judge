@@ -28,6 +28,13 @@ reports/*.log
 *.blg
 .pytest_cache/
 tmp/
+output/
+.tectonic-cache/
+reports/final/figures/*.png
+reports/final/*.log
+reports/final/*.xdv
+reports/final/*.bbl
+reports/final/*.blg
 .DS_Store
 Thumbs.db
 

@@ -1,0 +1,5 @@
+method,repetitions,mixed_macro_f1,mixed_macro_f1_defined,mixed_kappa,mixed_kappa_defined
+LARA G/norm,3,0.9447402012100713,3,0.8895002983475201,3
+Lexical active learning,3,0.8631934819338031,3,0.7299149293157273,3
+Local,3,0.9673874776150843,3,0.9347954768128627,3
+MiniLM + temperature,3,0.8113738600728904,3,0.6245691584601611,3
